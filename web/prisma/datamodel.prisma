@@ -1,0 +1,30 @@
+enum LogType {
+  USER_CREATED
+  USER_UPDATED
+  VIAJE_USED
+  VIAJES_ADDED
+}
+
+
+
+type User {
+  id: ID! @id
+  uid: String! @unique
+  dni: Int! @unique
+  viajes: Int
+}
+
+type Log {
+  id: ID! @id
+  user: User! @relation(link: INLINE)
+  type: LogType!
+  date: DateTime!
+  data: Json
+}
+
+type Metadata {
+  id: ID! @id
+  date: DateTime!
+  pasePrice: Int
+  viajePrice: Int
+}

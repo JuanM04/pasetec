@@ -1,0 +1,7 @@
+endpoint: https://us1.prisma.sh/eest2/pasetec/prod
+datamodel: datamodel.prisma
+secret: ${env:PRISMA_SECRET}
+
+generate:
+  - generator: javascript-client
+    output: ./generated/prisma-client/

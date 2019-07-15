@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "name": "Pase-Tec",
+  "alias": "pasetec.juanm04.com",
+  "regions": ["gru1"],
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": { "distDir": "build" }
+    },
+    { "src": "api/*.js", "use": "@now/node" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1.js" },
+    { "src": "/static/(.*)", "dest": "/static/$1" },
+    { "src": "/asset-manifest.json", "dest": "/asset-manifest.json" },
+    { "src": "/manifest.json", "dest": "/manifest.json" },
+    { "src": "/precache-manifest.(.*)", "dest": "/precache-manifest.$1" },
+    { "src": "/service-worker.js", "dest": "/service-worker.js" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ],
+  "env": {
+    "SECRET": "@pasetec_secret",
+    "PRISMA_SECRET": "@pasetec_prisma_secret"
+  }
+}

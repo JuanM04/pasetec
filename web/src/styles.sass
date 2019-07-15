@@ -1,0 +1,50 @@
+$primary:   #FFAA02
+$success:   #6EE550
+$info:      #0EC3F9
+$warning:   #FFD232
+$danger:    #FF6B79
+
+@import "node_modules/shards-ui/src/scss/shards.scss"
+
+body
+  margin: 0
+  background-color: #FAFAFA
+
+.main
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-direction: column
+
+  @include media-breakpoint-up(sm)
+    width: 500px
+
+h1
+  width: 100%
+  margin: 100px auto
+  text-align: center
+
+
+.Board
+  width: 100%
+  span
+    text-align: center
+  .col
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-direction: column
+  
+  .top
+    .big
+      font-size: 30px
+      font-weight: bold
+    .small
+      font-size: 15px
+  .bottom
+
+
+.FAQ
+  margin: 100px 25px
+  h3
+    margin: 13px 30px

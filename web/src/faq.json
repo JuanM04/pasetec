@@ -1,0 +1,22 @@
+[
+  {
+    "question": "¿Qué es Pase-Tec?",
+    "answer": "Pase-Tec es un sistema de boletas electrónico para el colectivo escolar. Funciona en base a \"viajes\" y está vinculado a la persona mediante su DNI."
+  },
+  {
+    "question": "¿Para qué es esta página?",
+    "answer": "Aquí podés consultar tus viajes disponibles y ver información sobre Pase-Tec. Si estás en celular, puede ser que te haya salido un cartelito de \"Agregar al inicio\"... hacele clic."
+  },
+  {
+    "question": "¿Cómo consigo mi pase?",
+    "answer": "Solamente necesitás saber tu DNI y PASE_PRICE. Vas a Cooperadora y ahí mismo te dan tu pase (podés pedir un llavero o una tarjeta)."
+  },
+  {
+    "question": "¿Cómo recargo mi pase?",
+    "answer": "En Cooperadora. Sabiendo tu DNI o llevando tu pase podés cargar cuantos viajes quieras. También podés cargarle viajes a otras personas ;)"
+  },
+  {
+    "question": "¿Qué pasa si pierdo mi pase? ¿Pierdo mis viajes?",
+    "answer": "No, no perdés tus viajes. En Cooperadora tendrás que comprar otro pase (PASE_PRICE) y tus viajes se vincularán a ese pase."
+  }
+]
