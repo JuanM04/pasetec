@@ -80,7 +80,7 @@ function App() {
 
   return (
     <Container className="main">
-      <h1>Pase-Tec</h1>
+      <h1>PaseTec</h1>
 
       {!navigator.onLine &&<Alert theme="primary" >No tenés conexión a internet</Alert>}
 
@@ -95,14 +95,14 @@ function App() {
               ) || ''
             )}
             onKeyPress={e => {
-              if(loading) return
+              if(loading || dniInput === '') return
               if(e.which !== 13 && e.keyCode !== 13) return
               getUser(dniInput)
             }}
             disabled={loading}
           />
           <InputGroupAddon type="append">
-            <Button disabled={loading} onClick={() => getUser(dniInput)}>Ingresar</Button>
+            <Button disabled={loading || dniInput === ''} onClick={() => getUser(dniInput)}>Ingresar</Button>
           </InputGroupAddon>
         </InputGroup>
       }

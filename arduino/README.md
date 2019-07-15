@@ -1,4 +1,4 @@
-# Pase-Tec – _Arduino_
+# PaseTec – _Arduino_
 
 Arduino Uno, WeMoS D1 mini and RFID-RC522.
 

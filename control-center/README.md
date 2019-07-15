@@ -1,4 +1,4 @@
-# Pase-Tec – _Control Center_
+# PaseTec – _Control Center_
 
 [Electron](http://electronjs.org)-based app with [React](https://reactjs.org/) as frontend that connects to an [Arduino](https://www.arduino.cc/) using [SerialPort](https://serialport.io/).
 

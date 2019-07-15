@@ -1,4 +1,4 @@
-# Pase-Tec – _Web_
+# PaseTec – _Web_
 
 [Create React App](https://facebook.github.io/create-react-app/) with a Service Worker and an [Express]([https://expressjs.com/](https://expressjs.com/)) API that communicates to a [Prisma](https://www.prisma.io/) database, all uploaded to [Now](https://zeit.co/now).
 

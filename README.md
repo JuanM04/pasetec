@@ -1,8 +1,8 @@
-# Pase-Tec
+# PaseTec
 
 An electronic system of scholar transport.
 
-## How does it work?
+## How it works
 
 The entire system can be split into three "independent" parts:
 

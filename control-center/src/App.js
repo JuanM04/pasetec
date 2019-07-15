@@ -39,7 +39,7 @@ export default () => {
     <>
       <Navbar theme="primary" type="light" expand>
         <Container>
-          <NavbarBrand href="#"><span>Pase-Tec</span> <br/> Centro de Control</NavbarBrand>
+          <NavbarBrand href="#"><span>PaseTec</span> <br/> Centro de Control</NavbarBrand>
           {portSetted &&
             <Nav navbar>
               {
