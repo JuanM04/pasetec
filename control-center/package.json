@@ -2,7 +2,7 @@
   "name": "pasetec-control-center",
   "version": "0.1.0",
   "private": true,
-  "main": "main.js",
+  "main": "public/electron.js",
   "author": {
     "name": "JuanM04",
     "email": "me@juanm04.com",
@@ -13,10 +13,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron": "yarn build && electron .",
-    "electron-dev": "NODE_ENV=development yarn electron",
-    "electron-build": "yarn build && electron-builder",
-    "electron-rebuild": "electron-rebuild -w serialport,@serialport/parser-readline"
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "preelectron-pack": "yarn build",
+    "electron-pack": "electron-packager . PaseTec --app-copyright=\"Copyright © 2019 JuanM04\" --out=dist/ --overwrite",
+    "postinstall": "electron-rebuild"
   },
   "homepage": "./",
   "eslintConfig": {
@@ -35,11 +35,21 @@
     ]
   },
   "build": {
-    "appId": "com.juanm04.pasetec"
+    "appId": "com.juanm04.pasetec",
+    "productName": "PaseTec – Centro de Control",
+    "copyright": "Copyright © 2019 ${author}",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
   },
   "dependencies": {
     "@serialport/parser-readline": "^2.0.2",
     "dotenv": "^8.0.0",
+    "electron-is-dev": "^1.1.0",
     "isomorphic-unfetch": "^3.0.0",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
@@ -50,8 +60,10 @@
     "slugify": "^1.3.4"
   },
   "devDependencies": {
+    "concurrently": "^4.1.1",
     "electron": "^5.0.6",
-    "electron-builder": "^21.0.15",
-    "electron-rebuild": "^1.8.5"
+    "electron-packager": "^14.0.1",
+    "electron-rebuild": "^1.8.5",
+    "wait-on": "^3.3.0"
   }
 }

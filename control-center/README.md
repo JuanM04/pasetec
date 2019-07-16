@@ -17,19 +17,19 @@ $ yarn electron-rebuild # More info in https://serialport.io/docs/guide-installa
 ```
 control-center/
 |-- public/
+  |-- electron.js
 |-- src/
   |-- actions/
   |-- components/
   |-- App.js
 |-- electron-builder.env
-|-- main.js
 ```
 
 - **`public/`**: Public files of Create React App
 - **`actions/`**: Is like 'pages'
 - **`App.js`**: Create React App home
 - **`electron-builder.env`**: There go the env vars. Follow `electron-builder.env.example` to create it
-- **`main.js`**: Electron code
+- **`electron.js`**: Electron code
 
 ## Running
 

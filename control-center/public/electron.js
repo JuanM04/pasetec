@@ -1,6 +1,7 @@
 require('dotenv').config({ path: './electron-builder.env' })
 const { app, BrowserWindow, ipcMain } = require('electron'),
       path = require('path'),
+      isDev = require('electron-is-dev'),
       url = require('url'),
       SerialPort = require('serialport'),
       Readline = require('@serialport/parser-readline'),
@@ -35,18 +36,18 @@ function createWindow() {
   });
 
   mainWindow.loadURL(
-    process.env.NODE_ENV === 'development'
+    isDev
     ?
     'http://localhost:3000'
     :
     url.format({
-      pathname: path.join(__dirname, 'build/index.html'),
+      pathname: path.join(__dirname, '../build/index.html'),
       protocol: 'file:',
       slashes: true
     })
   );
 
-  if(process.env.NODE_ENV === 'development') mainWindow.webContents.openDevTools();
+  if(isDev) mainWindow.webContents.openDevTools();
 
   mainWindow.webContents.on('did-finish-load', sendPorts)
 
