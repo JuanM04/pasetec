@@ -1,4 +1,4 @@
-require('dotenv').config({ path: './electron-builder.env' })
+require('dotenv').config()
 const { app, BrowserWindow, ipcMain } = require('electron'),
       path = require('path'),
       isDev = require('electron-is-dev'),
@@ -9,8 +9,13 @@ const { app, BrowserWindow, ipcMain } = require('electron'),
 
 let mainWindow
 
+
+
+
+
+// Fetch-to-API function
 async function post(endpoint, data={}) {
-  const response = await fetch(`${process.env.BASE_URL}${endpoint}`, {
+  const response = await fetch(`${process.env.BASE_URL}/api${endpoint}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -25,7 +30,7 @@ async function post(endpoint, data={}) {
 
 
 
-
+// Create Window
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 600,
@@ -41,7 +46,7 @@ function createWindow() {
     'http://localhost:3000'
     :
     url.format({
-      pathname: path.join(__dirname, '../build/index.html'),
+      pathname: path.join(__dirname, 'build/index.html'),
       protocol: 'file:',
       slashes: true
     })
@@ -60,6 +65,7 @@ function createWindow() {
 
 
 
+// Electron code
 app.on('ready', createWindow);
 
 app.on('window-all-closed', function () {
@@ -78,6 +84,7 @@ app.on('activate', function () {
 
 
 
+// Code related to SerialPort
 function sendPorts() {
   SerialPort.list()
     .then(ports => {
@@ -103,6 +110,7 @@ ipcMain.on('use-port', (e, port) => {
 
 
 
+// Listeners
 ipcMain.on('get-user', (e, data) => {
   post('/get-user', data)
     .then(user => {
