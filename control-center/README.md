@@ -7,6 +7,9 @@
 You'll need [Node](https://nodejs.org/en/) AND [Yarn](https://yarnpkg.com/en/) installed.
 
 ```bash
+# If you are using Windows
+$ yarn global add windows-build-tools
+
 $ cd pasetec/control-center
 $ yarn install
 $ yarn electron-rebuild # More info in https://serialport.io/docs/guide-installation#electron
@@ -21,20 +24,31 @@ control-center/
   |-- actions/
   |-- components/
   |-- App.js
-|-- electron-builder.env
+|-- .env
 |-- main.js
 ```
 
 - **`public/`**: Public files of Create React App
 - **`actions/`**: Is like 'pages'
 - **`App.js`**: Create React App home
-- **`electron-builder.env`**: There go the env vars. Follow `electron-builder.env.example` to create it
+- **`.env`**: There go the env vars. Follow `.env.example` to create it
 - **`main.js`**: Electron code
 
 ## Running
 
-When developing, you'll have two command-lines: one running the React server (`$ yarn start`) and another the Electron app (`$ yarn electron-dev`). To see the production app, only run `$ yarn electron` (it builds the React app and run Electron in production mode).
+When developing, you'll run the React server and the Electron app with the same command: `$ yarn electron-dev`.
 
 ## Building
 
-Run `$ yarn electron-build`. More info about it [here](https://www.electron.build/).
+Disclaimer: because of the use of native modules, you can only build the app for the same OS you're using. However, you can build for both _ia32_ and _x64_. To achieve this, there are two dependencies that will rebuild the modules and other that will pack the app: [Electron Rebuild](https://github.com/electron/electron-rebuild) and [Electron Packager](https://github.com/electron/electron-packager).
+
+To build the app, you just run this command:
+```bash
+$ yarn electron-pack
+```
+
+If you want to build for a arch different that the one you have on your computer:
+```bash
+$ yarn postinstall --arch=ARCH
+$ yarn electron-pack --arch=ARCH
+```

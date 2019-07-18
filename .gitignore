@@ -134,5 +134,5 @@ typings/
 
 
 build/
-electron-builder.env
+dist/
 conf.h
