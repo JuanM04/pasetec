@@ -15,11 +15,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "ppppreelectron-pack": "yarn build",
+    "preelectron-pack": "yarn build",
     "electron-pack": "electron-packager . --out=dist/ --overwrite",
     "postinstall": "electron-rebuild"
   },
-  "homepage": "./",
+  "homepage": ".",
   "eslintConfig": {
     "extends": "react-app"
   },
