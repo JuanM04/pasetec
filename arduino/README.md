@@ -10,13 +10,20 @@ You'll need the [Arduino IDE](https://www.arduino.cc/en/main/software) installed
 
 - Start the Arduino IDE and open _Preferences_.
 - Enter `https://arduino.esp8266.com/stable/package_esp8266com_index.json` in _Additional Board Manager URLs_. (You can put multiple URLs separated by commas).
-- Open _Boards Manager_ from _Tools > Board_ menu and install  `esp8266`  platform.
+- Open _Boards Manager_ from _Tools > Board_ menu and install `esp8266` platform.
 - Now you are able to select it when uploading to the WeMos D1 mini.
 
 #### MFRC522 Library
 
 - Start the Arduino IDE and go to _Sketch > Include Library > Manage Libraries..._.
 - Search `MFRC522` and install it.
+- Now you are able to use it.
+
+#### NewLiquidCrystal Library
+
+- Download the .ZIP from [this pepository](https://bitbucket.org/fmalpartida/new-liquidcrystal/downloads/) (v1.5.1 works fine) and save it somewhere in your PC.
+- Start the Arduino IDE and go to _Sketch > Include Library > Add .ZIP Library..._.
+- Select your .ZIP.
 - Now you are able to use it.
 
 ### conf.h
