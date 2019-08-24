@@ -47,7 +47,16 @@ arduino/
   |-- uno/
 ```
 
-- **`bus/uno/`**: Contains the code for the Arduino Uno that goes in the bus
-- **`bus/wemos/`**: Contains the code for the WeMoS D1 mini that goes in the bus
-- **`control-center/uno/`**: Contains the code for the Arduino Uno that goes in the Control Center
-- **`*.png`**: Images that contain information about the components used and how are they connected
+- **`bus/uno/`**: Contiene el códiga para el Arduino Uno que va en el colectivo
+- **`bus/wemos/`**: Contiene el códiga para el WeMoS D1 mini que va en el colectivo
+- **`control-center/uno/`**: Contiene el códiga para el Arduino Uno que va en el Centro de Control
+
+## _Placas y Cables_
+
+### Colectivo
+
+![Colectivo](bus/bus.png)
+
+### Centro de Control
+
+![Centro de Control](control-center/control-center.png)

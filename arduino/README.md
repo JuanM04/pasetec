@@ -50,4 +50,13 @@ arduino/
 - **`bus/uno/`**: Contains the code for the Arduino Uno that goes in the bus
 - **`bus/wemos/`**: Contains the code for the WeMoS D1 mini that goes in the bus
 - **`control-center/uno/`**: Contains the code for the Arduino Uno that goes in the Control Center
-- **`*.png`**: Images that contain information about the components used and how are they connected
+
+## _Boards and Wires_
+
+### Bus
+
+![Bus](bus/bus.png)
+
+### Control Center
+
+![Control Center](control-center/control-center.png)
