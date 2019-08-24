@@ -1,3 +1,5 @@
+English | [Español](README.es.md)
+
 # PaseTec – _Web_
 
 [Create React App](https://facebook.github.io/create-react-app/) with a Service Worker and an [Express]([https://expressjs.com/](https://expressjs.com/)) API that communicates to a [Prisma](https://www.prisma.io/) database, all uploaded to [Now](https://zeit.co/now).
@@ -37,7 +39,7 @@ web/
 - **`.env`**: There go the env vars. Follow `.env.example` to create it
 - **`now.json`**: Now configuration. Make sure to replace the secrets!
 
-## Running
+## Developing
 
 Run `$ now dev`. More info about it [here](https://zeit.co/blog/now-dev).
 
