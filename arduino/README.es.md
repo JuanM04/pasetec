@@ -11,13 +11,13 @@ Necesitás tener el [Arduino IDE](https://www.arduino.cc/en/main/software) insta
 #### Placas ESP8266
 
 - Iniciá el Arduino IDE y andá a _Preferencias_.
-- Ingresá `https://arduino.esp8266.com/stable/package_esp8266com_index.json` en _Additional Board Manager URLs_. (Podés poner múltiples URL separándolas con comas).
-- Abrí _Boards Manager_ desde el _Tools > Board_ menu e instalá la plataforma `esp8266`.
+- Ingresá `https://arduino.esp8266.com/stable/package_esp8266com_index.json` en _Gestor de URLs Adicionales de Tarjetas_. (Podés poner múltiples URL separándolas con comas).
+- Abrí _Gestor de tarjetas..._ desde el  menu _Herramientas > Placa_ e instalá la plataforma `esp8266`.
 - Ahora tenés disponible la placa del WeMos D1 mini.
 
 #### Librería MFRC522
 
-- Iniciá el Arduino IDE y andá a _Sketch > Include Library > Manage Libraries..._.
+- Iniciá el Arduino IDE y andá a _Programa > Incluir Librería > Administrar Bibliotecas..._.
 - Buscá `MFRC522` e instalalo.
 - Ahora podés usarla.
 
@@ -25,7 +25,7 @@ Necesitás tener el [Arduino IDE](https://www.arduino.cc/en/main/software) insta
 
 Dentro de `arduino/bus/wemos/`, necesitarás crear un archivo `conf.h`. Es como un dotenv para Arduino, y debe verse así:
 
-```c++11
+```c++
 #define NETWORK_SSID      "MiRedWifi"
 #define NETWORK_PASSWORD  "C0ntr4seÑa"
 #define HOST              "ejemplo.com"
@@ -34,7 +34,7 @@ Dentro de `arduino/bus/wemos/`, necesitarás crear un archivo `conf.h`. Es como 
 
 #### `CACert.ino`
 
-Dentro de `arduino/bus/wemos/`, necesitarás crear un archivo `CACert.ino`. Ahí irá el certificado raiz SSL de tu host. [Acá](GET_CACERT.es.md) hay una guía para obtenerlo.
+Dentro de `arduino/bus/wemos/`, necesitarás crear un archivo `CACert.ino`. Ahí irá el certificado raíz SSL de tu host. [Acá](.get_cacert/GET_CACERT.es.md) hay una guía para obtenerlo.
 
 ### Estructura de Archivos
 
