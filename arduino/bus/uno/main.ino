@@ -95,8 +95,6 @@ void setup() {
 
 
 void loop() {
-  if(Serial.available()) playBuzzer(); // REMOVE!!!
-  
   while(Serial.available() > 0) {
     serialAcum.concat(char(Serial.read()));
   }

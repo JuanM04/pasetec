@@ -45,3 +45,7 @@ arduino/
 - **`bus/wemos/`**: Contains the code for the WeMoS D1 mini that goes in the bus
 - **`control-center/uno/`**: Contains the code for the Arduino Uno that goes in the Control Center
 - **`*.png`**: Images that contain information about the components used and how are they connected
+
+## Notes
+
+I don't know why, but when you turn on both an Uno and a WeMoS that are connected, the WeMoS **must** be turned on first.
