@@ -19,13 +19,6 @@ You'll need the [Arduino IDE](https://www.arduino.cc/en/main/software) installed
 - Search `MFRC522` and install it.
 - Now you are able to use it.
 
-#### NewLiquidCrystal Library
-
-- Download the .ZIP from [this pepository](https://bitbucket.org/fmalpartida/new-liquidcrystal/downloads/) (v1.5.1 works fine) and save it somewhere in your PC.
-- Start the Arduino IDE and go to _Sketch > Include Library > Add .ZIP Library..._.
-- Select your .ZIP.
-- Now you are able to use it.
-
 ### conf.h
 
 In `arduino/bus/wemos/`, you'll need to create a `conf.h` file. Is like a dotenv for Arduino, and should look like this:

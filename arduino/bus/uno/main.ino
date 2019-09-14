@@ -1,30 +1,56 @@
 #include <Wire.h>
-#include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal.h>
 
 
 
-LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE); // Ser LCD I2C address
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
 String serialAcum = "";
 bool connecting = false;
 int connectingAccum = 0;
 bool LCDTimeoutOn = false;
 unsigned long timeFromLastLCD;
+#define BUZZER 10
 
 
 
 
+
+void playBuzzer() {
+  digitalWrite(BUZZER, HIGH);
+  delay(1000);
+  digitalWrite(BUZZER, LOW);
+}
 
 void setLCDDefault() {
   LCDTimeoutOn = false;
   lcd.clear();
-  lcd.setCursor(1, 1);
-  lcd.print("Escanee su Tarjeta");
+  writeOnLCD(3,1, "Escanee su");
+  writeOnLCD(6,2, "Pase");
 }
 
 void startLCDTimeout() {
   LCDTimeoutOn = true;
   timeFromLastLCD = millis();
+}
+
+void writeOnLCD(int col, int row, String str) {
+  lcd.setCursor(col, row);
+  lcd.print(str);
+}
+
+
+
+void connectingDots(int msgCol, String msg) {
+  if(!connecting || connectingAccum == 4) {
+    connectingAccum = 0;
+    lcd.clear();
+    writeOnLCD(msgCol, 1, msg);
+    lcd.setCursor(6, 2);
+  }
+  lcd.print(".");
+  connectingAccum++;
+  connecting = true;
 }
 
 
@@ -34,57 +60,26 @@ void newWifiStatus(String wifiStatus) {
     String viajes = wifiStatus.substring(7);
 
     lcd.clear();
-    if(viajes != "-1") {
-      lcd.setCursor(9, 0);
-      lcd.print("Buen Viaje!");
-      lcd.setCursor(0, 2);
-      lcd.print("Viajes Restantes:");
-      lcd.setCursor(0, 3);
-      lcd.print(viajes);
+    if (viajes != "-1") {
+      writeOnLCD(2,1, "Suerte  ^w^/");
+      writeOnLCD(0,3, "Viajes:");
+      writeOnLCD(8,3, viajes);
+      playBuzzer();
     } else {
-      lcd.setCursor(5, 0);
-      lcd.print("No tiene Viajes");
-      lcd.setCursor(0, 2);
-      lcd.print("Carge mas en");
-      lcd.setCursor(0, 3);
-      lcd.print("Cooperadora");
+      writeOnLCD(3,1, "Sin Viajes");
+      writeOnLCD(1,2, "No puede subir");
     }
     startLCDTimeout();
   }
   else if (wifiStatus == "error") {
-    lcd.setCursor(6, 1);
-    lcd.print("Error :(");
-    lcd.setCursor(1, 2);
-    lcd.print("Escanee nuevamente");
+    lcd.clear();
+    writeOnLCD(4,1, "Error :(");
+    writeOnLCD(0,2, "Intente otra vez");
     startLCDTimeout();
   }
-  else if(wifiStatus == "connected") {
-    setLCDDefault();
-  }
-  else if (wifiStatus == "connecting") {
-    if(!connecting || connectingAccum == 4) {
-      connectingAccum = 0;
-      lcd.clear();
-      lcd.setCursor(0, 1);
-      lcd.print("Iniciando el Sistema");
-      lcd.setCursor(8, 2);
-    }
-    lcd.print(".");
-    connectingAccum++;
-    connecting = true;
-  }
-  else if (wifiStatus == "connection-lost") {
-    if(!connecting || connectingAccum == 4) {
-      connectingAccum = 0;
-      lcd.clear();
-      lcd.setCursor(4, 1);
-      lcd.print("Reconectando");
-      lcd.setCursor(8, 2);
-    }
-    lcd.print(".");
-    connectingAccum++;
-    connecting = true;
-  }
+  else if (wifiStatus == "connected") setLCDDefault();
+  else if (wifiStatus == "connecting") connectingDots(3, "Arrancando");
+  else if (wifiStatus == "connection-lost") connectingDots(2, "Reconectando");
 }
 
 
@@ -93,12 +88,15 @@ void newWifiStatus(String wifiStatus) {
 
 void setup() {
   Serial.begin(115200);     // Initiate a serial communication
-  lcd.begin(20, 4);         // Initiate LCD 20x4
+  lcd.begin(16, 4);         // Initiate LCD 16x4
+  pinMode(BUZZER, OUTPUT);
 }
 
 
 
 void loop() {
+  if(Serial.available()) playBuzzer(); // REMOVE!!!
+  
   while(Serial.available() > 0) {
     serialAcum.concat(char(Serial.read()));
   }
