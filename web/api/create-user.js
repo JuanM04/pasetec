@@ -15,20 +15,25 @@ app.post('*', (req, res) => {
 
   const { uid, dni } = req.body
 
-  prisma.$exists.user({
-    OR: [ { uid }, { dni } ]
-  })
-    .then(userExists => {
+  ;(async () => {
+    try {
+      const userExists = await prisma.$exists.user({
+        OR: [ { uid }, { dni } ]
+      })
       if(userExists) throw 'El UID o el DNI ya existen en la base de datos'
-      return prisma.createUser({ uid, dni, viajes: 0 })
-    })
-    .then(user => {
-      prisma.createLog({
+  
+      const user = await prisma.createUser({ uid, dni, viajes: 0 })
+  
+      await prisma.createLog({
         user: { connect: { id: user.id } },
         type: 'USER_CREATED',
         date: new Date(),
         data: { uid, dni }
-      }).then(() => res.send(user))
-    })
-    .catch(error => res.send({ error }))
+      })
+  
+      res.send(user)
+    } catch (error) {
+      res.send({ error })
+    }
+  })()
 })

@@ -12,10 +12,16 @@ app.post('*', (req, res) => {
 
 
 
-  prisma.metadatas({
-    orderBy: 'date_ASC',
-    last: 1
-  })
-    .then(metadata => res.send(metadata[0]))
-    .catch(error => res.send({ error }))
+  ;(async () => {
+    try {
+      const metadata = await prisma.metadatas({
+        orderBy: 'date_ASC',
+        last: 1
+      })
+
+      res.send(metadata[0])
+    } catch (error) {
+      res.send({ error })
+    }
+  })()
 })
