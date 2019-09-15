@@ -13,10 +13,16 @@ app.post('*', (req, res) => {
 
 
 
-  prisma.createMetadata({
-    date: new Date(),
-    ...req.body
-  })
-    .then(metadata => res.send(metadata))
-    .catch(error => res.send({ error }))
+  ;(async () => {
+    try {
+      const metadata = await prisma.createMetadata({
+        date: new Date(),
+        ...req.body
+      })
+
+      res.send(metadata)
+    } catch (error) {
+      res.send({ error })
+    }
+  })()
 })

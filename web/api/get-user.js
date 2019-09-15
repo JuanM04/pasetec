@@ -14,7 +14,11 @@ app.post('*', (req, res) => {
 
   const { uid, dni } = req.body
 
-  prisma.user({ uid, dni })
-    .then(user => res.send(user || false))
-    .catch(error => res.send({ error }))
+  ;(async () => {
+    try {
+      res.send(await prisma.user({ uid, dni }) || false)
+    } catch (error) {
+      res.send({ error })
+    }
+  })()
 })

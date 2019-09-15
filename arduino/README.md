@@ -12,7 +12,7 @@ You'll need the [Arduino IDE](https://www.arduino.cc/en/main/software) installed
 
 - Start the Arduino IDE and open _Preferences_.
 - Enter `https://arduino.esp8266.com/stable/package_esp8266com_index.json` in _Additional Board Manager URLs_. (You can put multiple URLs separated by commas).
-- Open _Boards Manager..._ from _Tools > Board_ menu and install `esp8266` platform.
+- Open _Boards Manager_ from _Tools > Board_ menu and install `esp8266` platform.
 - Now you are able to select it when uploading to the WeMos D1 mini.
 
 #### MFRC522 Library
@@ -60,3 +60,7 @@ arduino/
 ### Control Center
 
 ![Control Center](control-center/control-center.png)
+
+## Notes
+
+I don't know why, but when you turn on both an Uno and a WeMoS that are connected, the WeMoS **must** be turned on first.

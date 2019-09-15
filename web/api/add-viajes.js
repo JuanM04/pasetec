@@ -16,16 +16,17 @@ app.post('*', (req, res) => {
   const { id } = req.body
   const newViajes = parseInt(req.body.newViajes)
 
-  prisma.user({ id })
-    .then(user => {
+  ;(async () => {
+    try {
+      let user = prisma.user({ id })
       if(!user) throw 'El usuario no se ha encontrado'
-      return prisma.updateUser({
+  
+      user = await prisma.updateUser({
         data: { viajes: user.viajes + newViajes },
         where: { id: user.id }
       })
-    })
-    .then(user => {
-      prisma.createLog({
+  
+      await prisma.createLog({
         user: { connect: { id: user.id } },
         type: 'VIAJES_ADDED',
         date: new Date(),
@@ -33,7 +34,11 @@ app.post('*', (req, res) => {
           initialViajes: user.viajes - newViajes,
           viajesAdded: newViajes
         }
-      }).then(() => res.send({ viajes: user.viajes }))
-    })
-    .catch(error => res.send({ error }))
+      })
+  
+      res.send({ viajes: user.viajes })
+    } catch (error) {
+      res.send({ error })
+    }
+  })()
 })

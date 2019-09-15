@@ -15,29 +15,31 @@ app.post('*', (req, res) => {
 
   const { id } = req.body
 
-  let oldUser, newUser
-  prisma.user({ id })
-    .then(user => {
-      if(!user) throw 'El usuario no se ha encontrado'
-      oldUser = user
+  ;(async () => {
+    try {
+      let oldUser, newUser
+      let user = await prisma.user({ id })
+      if (!user) throw 'El usuario no se ha encontrado'
 
+      oldUser = user
       let newData = req.body
       delete newData.id
 
-      return prisma.updateUser({
+      newUser = await prisma.updateUser({
         data: newData,
         where: { id }
       })
-    })
-    .then(user => {
-      newUser = user
-      
-      prisma.createLog({
+
+      await prisma.createLog({
         user: { connect: { id } },
         type: 'USER_UPDATED',
         date: new Date(),
         data: { oldUser, newUser }
-      }).then(() => res.send(user))
-    })
-    .catch(error => res.send({ error }))
+      })
+
+      res.send(newUser)
+    } catch (error) {
+      res.send({ error })
+    }
+  })()
 })

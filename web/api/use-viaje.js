@@ -15,23 +15,27 @@ app.post('*', (req, res) => {
 
   const uid = req.body
 
-  prisma.user({ uid })
-    .then(user => {
-      if(!user) throw 'error!'
-      if(!user.viajes) throw 'viajes:-1!'
+  ;(async () => {
+    try {
+      let user = await prisma.user({ uid })
+      if (!user) throw 'error!'
+      if (!user.viajes) throw 'viajes:-1!'
 
-      return prisma.updateUser({
+      user = await prisma.updateUser({
         data: { viajes: user.viajes - 1 },
         where: { id: user.id }
       })
-    })
-    .then(user => {
-      prisma.createLog({
+
+      await prisma.createLog({
         user: { connect: { id: user.id } },
         type: 'VIAJE_USED',
         date: new Date(),
         data: { initialViajes: user.viajes + 1 }
-      }).then(() => res.send(`viajes:${user.viajes}!`))
-    })
-    .catch(error => res.send(error))
+      })
+
+      res.send(`viajes:${user.viajes}!`)
+    } catch (error) {
+      res.send(error)
+    }
+  })()
 })
