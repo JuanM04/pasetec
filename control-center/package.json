@@ -16,7 +16,7 @@
     "eject": "react-scripts eject",
     "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "preelectron-pack": "yarn build",
-    "electron-pack": "electron-packager . --out=dist/ --overwrite",
+    "electron-pack": "electron-packager . --out=dist/ --overwrite --icon=assets/icon.ico",
     "postinstall": "electron-rebuild"
   },
   "homepage": ".",

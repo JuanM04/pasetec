@@ -136,3 +136,4 @@ typings/
 build/
 dist/
 conf.h
+CACert.ino

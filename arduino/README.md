@@ -1,3 +1,5 @@
+English | [Español](README.es.md)
+
 # PaseTec – _Arduino_
 
 Arduino Uno, WeMoS D1 mini and RFID-RC522.
@@ -10,7 +12,7 @@ You'll need the [Arduino IDE](https://www.arduino.cc/en/main/software) installed
 
 - Start the Arduino IDE and open _Preferences_.
 - Enter `https://arduino.esp8266.com/stable/package_esp8266com_index.json` in _Additional Board Manager URLs_. (You can put multiple URLs separated by commas).
-- Open _Boards Manager_ from _Tools > Board_ menu and install  `esp8266`  platform.
+- Open _Boards Manager..._ from _Tools > Board_ menu and install `esp8266` platform.
 - Now you are able to select it when uploading to the WeMos D1 mini.
 
 #### MFRC522 Library
@@ -19,16 +21,20 @@ You'll need the [Arduino IDE](https://www.arduino.cc/en/main/software) installed
 - Search `MFRC522` and install it.
 - Now you are able to use it.
 
-### conf.h
+#### `conf.h`
 
 In `arduino/bus/wemos/`, you'll need to create a `conf.h` file. Is like a dotenv for Arduino, and should look like this:
 
-```c++11
+```c++
 #define NETWORK_SSID      "MyWiFiNetwork"
 #define NETWORK_PASSWORD  "coolP44SW00RD"
-#define ENDPOINT          "http://example.com/api"
+#define HOST              "example.com"
 #define SECRET            "api-secret"
 ```
+
+#### `CACert.ino`
+
+In `arduino/bus/wemos/`, you'll find a `CACert.ino`. There goes the root SSL certificate of your host. [Here](.get_cacert/GET_CACERT.md) is a guide to get it.
 
 ### File Structure
 
@@ -44,4 +50,13 @@ arduino/
 - **`bus/uno/`**: Contains the code for the Arduino Uno that goes in the bus
 - **`bus/wemos/`**: Contains the code for the WeMoS D1 mini that goes in the bus
 - **`control-center/uno/`**: Contains the code for the Arduino Uno that goes in the Control Center
-- **`*.png`**: Images that contain information about the components used and how are they connected
+
+## _Boards and Wires_
+
+### Bus
+
+![Bus](bus/bus.png)
+
+### Control Center
+
+![Control Center](control-center/control-center.png)

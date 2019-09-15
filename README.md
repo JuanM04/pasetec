@@ -1,3 +1,5 @@
+English | [Español](README.es.md)
+
 # PaseTec
 
 An electronic system of scholar transport.

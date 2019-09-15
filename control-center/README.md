@@ -1,3 +1,5 @@
+English | [Español](README.es.md)
+
 # PaseTec – _Control Center_
 
 [Electron](http://electronjs.org)-based app with [React](https://reactjs.org/) as frontend that connects to an [Arduino](https://www.arduino.cc/) using [SerialPort](https://serialport.io/).
@@ -34,7 +36,7 @@ control-center/
 - **`.env`**: There go the env vars. Follow `.env.example` to create it
 - **`main.js`**: Electron code
 
-## Running
+## Developing
 
 When developing, you'll run the React server and the Electron app with the same command: `$ yarn electron-dev`.
 
