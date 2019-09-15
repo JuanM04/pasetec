@@ -60,3 +60,7 @@ arduino/
 ### Centro de Control
 
 ![Centro de Control](control-center/control-center.png)
+
+## Notas
+
+No sé por qué, pero cuando enciendas un Uno y un WeMoS que estén conectados, el WeMoS **debe** ser encendido antes.
