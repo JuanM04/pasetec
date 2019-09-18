@@ -24,7 +24,7 @@ for i in range(0, (x-1), 2):
 
 if hexOutput.endswith('\n  '):
     hexOutput = hexOutput[:-5]
-else
+else:
     hexOutput = hexOutput[:-2]
 
 with open(output, 'w+') as file:

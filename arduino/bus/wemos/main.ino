@@ -95,10 +95,7 @@ void loop() {
       Serial.print("connected");
     }
 
-    if ( mfrc522.PICC_IsNewCardPresent() && mfrc522.PICC_ReadCardSerial() ) {
-      useViaje(getUID());
-      delay(2000);
-    }
+    if (mfrc522.PICC_IsNewCardPresent() && mfrc522.PICC_ReadCardSerial()) useViaje(getUID());
 
     delay(500);
   }
