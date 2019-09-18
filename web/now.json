@@ -2,7 +2,7 @@
   "version": 2,
   "name": "PaseTec",
   "alias": "pasetec.juanm04.com",
-  "regions": ["gru1"],
+  "regions": ["pdx1"],
   "builds": [
     {
       "src": "package.json",
