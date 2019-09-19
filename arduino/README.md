@@ -23,7 +23,7 @@ You'll need the [Arduino IDE](https://www.arduino.cc/en/main/software) installed
 
 #### `conf.h`
 
-In `arduino/bus/wemos/`, you'll need to create a `conf.h` file. Is like a dotenv for Arduino, and should look like this:
+In `arduino/*/wemos/`, you'll need to create a `conf.h` file. Is like a dotenv for Arduino, and should look like this:
 
 ```c++
 #define NETWORK_SSID      "MyWiFiNetwork"
@@ -34,7 +34,7 @@ In `arduino/bus/wemos/`, you'll need to create a `conf.h` file. Is like a dotenv
 
 #### `CACert.ino`
 
-In `arduino/bus/wemos/`, you'll find a `CACert.ino`. There goes the root SSL certificate of your host. [Here](.get_cacert/GET_CACERT.md) is a guide to get it.
+In `arduino/*/wemos/`, you'll need a `CACert.ino`. There goes the root SSL certificate of your host. [Here](.get_cacert/GET_CACERT.md) is a guide to get it.
 
 ### File Structure
 
@@ -53,7 +53,9 @@ arduino/
 
 ## _Boards and Wires_
 
-### Bus
+### Bus and Checker
+
+The Checker is like the Bus without the buzzer.
 
 ![Bus](bus/bus.png)
 

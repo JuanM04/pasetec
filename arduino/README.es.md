@@ -23,7 +23,7 @@ Necesitás tener el [Arduino IDE](https://www.arduino.cc/en/main/software) insta
 
 #### `conf.h`
 
-Dentro de `arduino/bus/wemos/`, necesitarás crear un archivo `conf.h`. Es como un dotenv para Arduino, y debe verse así:
+Dentro de `arduino/*/wemos/`, necesitarás crear un archivo `conf.h`. Es como un dotenv para Arduino, y debe verse así:
 
 ```c++
 #define NETWORK_SSID      "MiRedWifi"
@@ -34,7 +34,7 @@ Dentro de `arduino/bus/wemos/`, necesitarás crear un archivo `conf.h`. Es como 
 
 #### `CACert.ino`
 
-Dentro de `arduino/bus/wemos/`, necesitarás crear un archivo `CACert.ino`. Ahí irá el certificado raíz SSL de tu host. [Acá](.get_cacert/GET_CACERT.es.md) hay una guía para obtenerlo.
+Dentro de `arduino/*/wemos/`, necesitarás crear un archivo `CACert.ino`. Ahí irá el certificado raíz SSL de tu host. [Acá](.get_cacert/GET_CACERT.es.md) hay una guía para obtenerlo.
 
 ### Estructura de Archivos
 
@@ -53,7 +53,9 @@ arduino/
 
 ## _Placas y Cables_
 
-### Colectivo
+### Colectivo y Consultor
+
+El Consultor es igual al Colectivo pero sin el buzzer.
 
 ![Colectivo](bus/bus.png)
 
