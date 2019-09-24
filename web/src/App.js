@@ -14,7 +14,7 @@ import {
   ListGroupItem,
   ListGroupItemHeading,
   ListGroupItemText,
-  Row
+  Row,
 } from 'shards-react'
 
 import FAQ from './faq.json'
@@ -25,14 +25,10 @@ import './styles.sass'
 const fetchOptions = {
   method: 'POST',
   headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  }
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
 }
-
-
-
-
 
 function App() {
   const [userInfo, setUserInfo] = useState(false)
@@ -40,17 +36,15 @@ function App() {
   const [dniInput, setDniInput] = useState('')
   const [loading, setLoading] = useState(false)
 
-
-
   function getUser(dni) {
     setLoading(true)
     fetch('/api/get-user', {
       ...fetchOptions,
-      body: JSON.stringify({ dni })
+      body: JSON.stringify({ dni }),
     })
       .then(res => res.json())
       .then(user => {
-        if(!user) alert('Usuario no encontrado')
+        if (!user) alert('Usuario no encontrado')
         else {
           setDniInput('')
           localStorage.setItem('user', user.dni)
@@ -62,52 +56,55 @@ function App() {
       .catch(err => console.error(err))
   }
 
-
-
   useEffect(() => {
-    if(!navigator.onLine) return
+    if (!navigator.onLine) return
 
     fetch('/api/get-prices', fetchOptions)
       .then(res => res.json())
       .then(res => setPrices({ pase: res.pasePrice, viaje: res.viajePrice }))
       .catch(err => console.error(err))
-    
+
     let dni = localStorage.getItem('user')
-    if(dni) getUser(parseInt(dni))
+    if (dni) getUser(parseInt(dni))
   }, [])
-
-
 
   return (
     <Container className="main">
       <h1>PaseTec</h1>
 
-      {!navigator.onLine &&<Alert theme="primary" >No tenés conexión a internet</Alert>}
+      {!navigator.onLine && (
+        <Alert theme="primary">No tenés conexión a internet</Alert>
+      )}
 
-      {(!userInfo && navigator.onLine) &&
+      {!userInfo && navigator.onLine && (
         <InputGroup>
           <FormInput
             placeholder="DNI"
             value={dniInput}
-            onChange={e => setDniInput(
-              parseInt(
-                slugify(e.target.value, { remove: /[^\d]+/g })
-              ) || ''
-            )}
+            onChange={e =>
+              setDniInput(
+                parseInt(slugify(e.target.value, { remove: /[^\d]+/g })) || ''
+              )
+            }
             onKeyPress={e => {
-              if(loading || dniInput === '') return
-              if(e.which !== 13 && e.keyCode !== 13) return
+              if (loading || dniInput === '') return
+              if (e.which !== 13 && e.keyCode !== 13) return
               getUser(dniInput)
             }}
             disabled={loading}
           />
           <InputGroupAddon type="append">
-            <Button disabled={loading || dniInput === ''} onClick={() => getUser(dniInput)}>Ingresar</Button>
+            <Button
+              disabled={loading || dniInput === ''}
+              onClick={() => getUser(dniInput)}
+            >
+              Ingresar
+            </Button>
           </InputGroupAddon>
         </InputGroup>
-      }
+      )}
 
-      {(userInfo && navigator.onLine) &&
+      {userInfo && navigator.onLine && (
         <Card className="Board">
           <CardBody>
             <Row className="top">
@@ -142,25 +139,23 @@ function App() {
             </Row>
           </CardBody>
         </Card>
-      }
-
-
+      )}
 
       <Card className="FAQ">
         <h3>F.A.Q.</h3>
         <ListGroup flush>
-          {
-            FAQ.map(({ question, answer }, i) => (
-              <ListGroupItem key={i}>
-                <ListGroupItemHeading>{question}</ListGroupItemHeading>
-                <ListGroupItemText>{answer.replace('PASE_PRICE', `$${prices.pase}`)}</ListGroupItemText>
-              </ListGroupItem>
-            ))
-          }
+          {FAQ.map(({ question, answer }, i) => (
+            <ListGroupItem key={i}>
+              <ListGroupItemHeading>{question}</ListGroupItemHeading>
+              <ListGroupItemText>
+                {answer.replace('PASE_PRICE', `$${prices.pase}`)}
+              </ListGroupItemText>
+            </ListGroupItem>
+          ))}
         </ListGroup>
       </Card>
     </Container>
   )
 }
 
-export default App;
+export default App

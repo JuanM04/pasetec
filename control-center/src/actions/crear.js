@@ -7,17 +7,11 @@ import Status from '../components/Status'
 
 const { ipcRenderer } = window.require('electron')
 
-
-
-
-
 export default () => {
   const [info, setInfo] = useState({ uid: '-' })
   const [dniInput, setDniInput] = useState('')
   const [status, setStatus] = useState(false)
   const [loading, setLoading] = useState(true)
-
-
 
   function newCard(uid) {
     setInfo({ uid })
@@ -31,16 +25,12 @@ export default () => {
     ipcRenderer.send('create-user', data)
   }
 
-
-
   useEffect(() => {
     ipcRenderer.on('card-detected', (_, uid) => newCard(uid))
     ipcRenderer.on('status', (_, data) => setStatus(data))
 
     return () => ipcRenderer.removeAllListeners()
   }, [])
-
-
 
   return (
     <Container className="main">
@@ -55,9 +45,7 @@ export default () => {
         disabled={loading}
         disabledSubmit={info.uid === '-' || dniInput === ''}
       />
-      {
-        status && <Status {...status} />
-      }
+      {status && <Status {...status} />}
     </Container>
   )
 }

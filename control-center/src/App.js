@@ -5,7 +5,7 @@ import {
   Navbar,
   NavbarBrand,
   NavItem,
-  NavLink
+  NavLink,
 } from 'shards-react'
 
 import Cargar from './actions/cargar'
@@ -25,47 +25,40 @@ const actions = [
   { name: 'Precios', component: Precios },
 ]
 
-
-
-
-
 export default () => {
   const [portSetted, setPortSetted] = useState(false)
   const [actionSelected, setActionSelected] = useState(actions[0])
 
-
-
-  return(
+  return (
     <>
       <Navbar theme="primary" type="light" expand>
         <Container>
-          <NavbarBrand href="#"><span>PaseTec</span> <br/> Centro de Control</NavbarBrand>
-          {portSetted &&
+          <NavbarBrand href="#">
+            <span>PaseTec</span> <br /> Centro de Control
+          </NavbarBrand>
+          {portSetted && (
             <Nav navbar>
-              {
-                actions.map(action => (
-                  <NavItem>
-                    <NavLink
-                      active={action.name === actionSelected.name}
-                      href="#"
-                      onClick={() => setActionSelected(action)}
-                    >
-                      {action.name}
-                    </NavLink>
-                  </NavItem>
-                ))
-              }
+              {actions.map(action => (
+                <NavItem>
+                  <NavLink
+                    active={action.name === actionSelected.name}
+                    href="#"
+                    onClick={() => setActionSelected(action)}
+                  >
+                    {action.name}
+                  </NavLink>
+                </NavItem>
+              ))}
             </Nav>
-          }
+          )}
         </Container>
       </Navbar>
 
-      {portSetted
-        ?
+      {portSetted ? (
         <actionSelected.component />
-        :
+      ) : (
         <PortSelector setPortSetted={setPortSetted} />
-      }
+      )}
     </>
   )
 }

@@ -1,8 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'shards-react'
 
-
-
 export default ({ dni, uid, viajes }) => (
   <Row className="Info">
     <Col>
@@ -13,12 +11,11 @@ export default ({ dni, uid, viajes }) => (
   </Row>
 )
 
-
-
-const Param = ({ label, data }) => (
-  data || data === 0
-  ?
-  <p><b>{label}:</b> {data}</p>
-  :
-  <></>
-)
+const Param = ({ label, data }) =>
+  data || data === 0 ? (
+    <p>
+      <b>{label}:</b> {data}
+    </p>
+  ) : (
+    <></>
+  )

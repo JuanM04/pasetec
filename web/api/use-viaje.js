@@ -8,10 +8,9 @@ app.use(bodyParser.text())
 
 app.post('*', (req, res) => {
   if (req.body == null) return res.status(400).send('missing body')
-  if (req.header('Secret') !== process.env.SECRET) return res.status(401).send({ error: 'invalid secret' })
+  if (req.header('Secret') !== process.env.SECRET)
+    return res.status(401).send({ error: 'invalid secret' })
   res.set('Content-Type', 'text/plain')
-
-
 
   const uid = req.body
 
@@ -23,14 +22,14 @@ app.post('*', (req, res) => {
 
       user = await prisma.updateUser({
         data: { viajes: user.viajes - 1 },
-        where: { id: user.id }
+        where: { id: user.id },
       })
 
       await prisma.createLog({
         user: { connect: { id: user.id } },
         type: 'VIAJE_USED',
         date: new Date(),
-        data: { initialViajes: user.viajes + 1 }
+        data: { initialViajes: user.viajes + 1 },
       })
 
       res.send(`viajes:${user.viajes}!`)

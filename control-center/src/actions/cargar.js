@@ -8,18 +8,12 @@ import Status from '../components/Status'
 
 const { ipcRenderer } = window.require('electron')
 
-
-
-
-
-export default ()  => {
+export default () => {
   const [info, setInfo] = useState(false)
   const [dniInput, setDniInput] = useState('')
   const [viajesInput, setViajesInput] = useState('')
   const [status, setStatus] = useState(false)
   const [loading, setLoading] = useState(false)
-
-
 
   function reset() {
     setInfo(false)
@@ -39,8 +33,6 @@ export default ()  => {
     ipcRenderer.send('add-viajes', { id: info.id, newViajes })
   }
 
-
-
   useEffect(() => {
     ipcRenderer.on('get-user-res', (_, data) => {
       data.dni = data.dni.toLocaleString('es')
@@ -50,24 +42,24 @@ export default ()  => {
       setLoading(false)
     })
     ipcRenderer.on('add-viajes-res', (_, viajes) => {
-      setStatus({ message: `El usuario ahora tiene ${viajes} viaje${viajes !== 1 ? 's' : ''}` })
+      setStatus({
+        message: `El usuario ahora tiene ${viajes} viaje${
+          viajes !== 1 ? 's' : ''
+        }`,
+      })
     })
     ipcRenderer.on('card-detected', (_, uid) => getUser({ uid }))
     ipcRenderer.on('status', (_, data) => {
-      if(!info) setLoading(false)
+      if (!info) setLoading(false)
       setStatus(data)
     })
 
     return () => ipcRenderer.removeAllListeners()
   }, [info, getUser])
 
-
-
   return (
     <Container className="main">
-      {
-        !info
-        ?
+      {!info ? (
         <>
           <p>Escanee un pase o escriba un DNI</p>
           <Input
@@ -79,7 +71,7 @@ export default ()  => {
             disabled={loading}
           />
         </>
-        :
+      ) : (
         <>
           <Reset reset={reset} disabled={loading} />
           <Info {...info} />
@@ -92,10 +84,8 @@ export default ()  => {
             disabled={loading || (status && status.type !== 'ERROR')}
           />
         </>
-      }
-      {
-        status && <Status {...status} />
-      }
+      )}
+      {status && <Status {...status} />}
     </Container>
   )
 }

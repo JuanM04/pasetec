@@ -10,8 +10,6 @@ app.post('*', (req, res) => {
   if (req.body == null) return res.status(400).send('missing body')
   res.set('Content-Type', 'text/plain')
 
-
-
   const uid = req.body
 
   ;(async () => {
@@ -21,7 +19,7 @@ app.post('*', (req, res) => {
 
       const metadata = await prisma.metadatas({
         orderBy: 'date_ASC',
-        last: 1
+        last: 1,
       })
 
       res.send(`res:${user.viajes}-${metadata[0].viajePrice}!`)

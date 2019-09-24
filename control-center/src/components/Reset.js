@@ -1,8 +1,6 @@
 import React from 'react'
 import { Button } from 'shards-react'
 
-
-
 export default ({ reset, loading }) => (
   <Button
     pill

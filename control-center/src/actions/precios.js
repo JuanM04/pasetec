@@ -6,18 +6,12 @@ import Status from '../components/Status'
 
 const { ipcRenderer } = window.require('electron')
 
-
-
-
-
 export default () => {
   const [pasePrice, setPasePrice] = useState('')
   const [viajePrice, setViajePrice] = useState('')
   const [status, setStatus] = useState(false)
   const [loading, setLoading] = useState(false)
   const disabled = loading || (status && status.type !== 'ERROR')
-
-
 
   function getPrices() {
     setLoading(true)
@@ -28,8 +22,6 @@ export default () => {
     setLoading(true)
     ipcRenderer.send('update-prices', { pasePrice, viajePrice })
   }
-
-
 
   useEffect(() => {
     ipcRenderer.on('get-prices-res', (_, data) => {
@@ -43,8 +35,6 @@ export default () => {
   }, [])
 
   useEffect(getPrices, [])
-
-
 
   return (
     <Container className="main">
@@ -70,9 +60,7 @@ export default () => {
       >
         Actualizar
       </Button>
-      {
-        status && <Status {...status} />
-      }
+      {status && <Status {...status} />}
     </Container>
   )
 }

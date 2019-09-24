@@ -8,10 +8,6 @@ import Status from '../components/Status'
 
 const { ipcRenderer } = window.require('electron')
 
-
-
-
-
 export default () => {
   const [info, setInfo] = useState(false)
   const [editing, setEditing] = useState(false)
@@ -20,8 +16,6 @@ export default () => {
   const [status, setStatus] = useState(false)
   const [loading, setLoading] = useState(false)
   const disabled = loading || (status && status.type !== 'ERROR')
-
-
 
   function reset() {
     setInfo(false)
@@ -39,10 +33,12 @@ export default () => {
 
   const updateUser = () => {
     setLoading(true)
-    ipcRenderer.send('update-user', { ...info, dni: dniInput, viajes: viajesInput })
+    ipcRenderer.send('update-user', {
+      ...info,
+      dni: dniInput,
+      viajes: viajesInput,
+    })
   }
-
-
 
   useEffect(() => {
     ipcRenderer.on('get-user-res', (_, data) => {
@@ -54,24 +50,20 @@ export default () => {
       setLoading(false)
     })
     ipcRenderer.on('card-detected', (_, uid) => {
-      if(editing) setInfo({ ...info, uid })
+      if (editing) setInfo({ ...info, uid })
       else getUser({ uid })
     })
     ipcRenderer.on('status', (_, data) => {
-      if(!info) setLoading(false)
+      if (!info) setLoading(false)
       setStatus(data)
     })
 
     return () => ipcRenderer.removeAllListeners()
   }, [editing, info, getUser])
 
-
-
   return (
     <Container className="main">
-      {
-        !editing
-        ?
+      {!editing ? (
         <>
           <p>Escanee un pase o escriba un DNI</p>
           <Input
@@ -83,7 +75,7 @@ export default () => {
             disabled={loading}
           />
         </>
-        :
+      ) : (
         <>
           <Reset reset={reset} disabled={loading} />
           <p>Para actualizar la tarjeta, escanee otra</p>
@@ -111,10 +103,8 @@ export default () => {
             Actualizar
           </Button>
         </>
-      }
-      {
-        status && <Status {...status} />
-      }
+      )}
+      {status && <Status {...status} />}
     </Container>
   )
 }
