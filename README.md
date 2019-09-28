@@ -17,3 +17,8 @@ The entire system can be split into three "independent" parts:
 ### Data-flow
 
 ![Data-Flow](data-flow.png)
+
+## Assets
+
+- **Design**: Figma file [here](https://www.figma.com/file/DkmXx82ARM2QYjc8GLEAHy/PaseTec).
+- **Arduino Boxes**: 3D models _soon_.

@@ -17,3 +17,8 @@ El sistema entero puede ser dividido en tres partes "independientes":
 ### Flujo de los Datos
 
 ![Flujo](data-flow.png)
+
+## Recursos
+
+- **Diseño**: Archivo de Figma [aquí](https://www.figma.com/file/DkmXx82ARM2QYjc8GLEAHy/PaseTec).
+- **Cajas de Arduino**: Modelos 3D _próximamente_.
