@@ -1,4 +1,4 @@
-endpoint: https://us1.prisma.sh/eest2/pasetec/prod
+endpoint: ${env:PRISMA_ENDPOINT}
 datamodel: datamodel.prisma
 secret: ${env:PRISMA_SECRET}
 

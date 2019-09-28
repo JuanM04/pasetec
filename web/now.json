@@ -1,7 +1,6 @@
 {
   "version": 2,
   "name": "PaseTec",
-  "alias": "pasetec.juanm04.com",
   "regions": ["pdx1"],
   "builds": [
     {
@@ -23,6 +22,7 @@
   ],
   "env": {
     "SECRET": "@pasetec_secret",
+    "PRISMA_ENDPOINT": "@pasetec_prisma_endpoint",
     "PRISMA_SECRET": "@pasetec_prisma_secret"
   }
 }

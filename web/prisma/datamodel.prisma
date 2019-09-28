@@ -5,8 +5,6 @@ enum LogType {
   VIAJES_ADDED
 }
 
-
-
 type User {
   id: ID! @id
   uid: String! @unique
