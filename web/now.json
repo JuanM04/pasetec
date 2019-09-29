@@ -8,9 +8,11 @@
       "use": "@now/static-build",
       "config": { "distDir": "build" }
     },
-    { "src": "api/*.js", "use": "@now/node" }
+    { "src": "api/*.js", "use": "@now/node" },
+    { "src": "api/graphql/index.js", "use": "@now/node" }
   ],
   "routes": [
+    { "src": "/api/graphql", "dest": "/api/graphql/index.js" },
     { "src": "/api/(.*)", "dest": "/api/$1.js" },
     { "src": "/static/(.*)", "dest": "/static/$1" },
     { "src": "/assets/(.*)", "dest": "/assets/$1" },

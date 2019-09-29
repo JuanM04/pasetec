@@ -1,30 +1,23 @@
-const express = require('express')
-const bodyParser = require('body-parser')
+const { text, send } = require('micro')
 const { prisma } = require('../prisma/generated/prisma-client')
 
-module.exports = app = express()
+module.exports = async (req, res) => {
+  if (req.headers.secret !== process.env.SECRET)
+    return send(res, 401, { error: 'Invalid Secret' })
 
-app.use(bodyParser.text())
+  const uid = await text(req)
 
-app.post('*', (req, res) => {
-  if (req.body == null) return res.status(400).send('missing body')
-  res.set('Content-Type', 'text/plain')
+  try {
+    let user = await prisma.user({ uid })
+    if (!user) throw 'error!'
 
-  const uid = req.body
+    const metadata = await prisma.metadatas({
+      orderBy: 'date_ASC',
+      last: 1,
+    })
 
-  ;(async () => {
-    try {
-      let user = await prisma.user({ uid })
-      if (!user) throw 'error!'
-
-      const metadata = await prisma.metadatas({
-        orderBy: 'date_ASC',
-        last: 1,
-      })
-
-      res.send(`res:${user.viajes}-${metadata[0].viajePrice}!`)
-    } catch (error) {
-      res.send(error)
-    }
-  })()
-})
+    res.send(`res:${user.viajes}-${metadata[0].viajePrice}!`)
+  } catch (error) {
+    res.send(error)
+  }
+}
