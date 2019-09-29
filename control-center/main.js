@@ -16,6 +16,7 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
     },
+    icon: path.resolve(__dirname, 'icons/png/64x64.png'),
   })
 
   mainWindow.loadURL(
