@@ -2,7 +2,7 @@
 
 # PaseTec – _Arduino_
 
-Arduino Uno, WeMoS D1 mini y RFID-RC522.
+Cajas de Arduino.
 
 ## Preparación
 
@@ -55,11 +55,14 @@ arduino/
 
 ### Colectivo y Consultor
 
+Arduino Uno, WeMoS D1 mini, RFID-RC522, LCD 16x4 y Buzzer/Zumbador/Coso-que-hace-ruido.
 El Consultor es igual al Colectivo pero sin el buzzer.
 
 ![Colectivo](bus/bus.png)
 
 ### Centro de Control
+
+Arduino Uno y RFID-RC522.
 
 ![Centro de Control](control-center/control-center.png)
 

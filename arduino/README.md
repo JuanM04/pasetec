@@ -2,7 +2,7 @@ English | [Español](README.es.md)
 
 # PaseTec – _Arduino_
 
-Arduino Uno, WeMoS D1 mini and RFID-RC522.
+Arduino Boxes.
 
 ## Setup
 
@@ -55,11 +55,14 @@ arduino/
 
 ### Bus and Checker
 
+Arduino Uno, WeMoS D1 mini, RFID-RC522, LCD 16x4 & Buzzer.
 The Checker is like the Bus without the buzzer.
 
 ![Bus](bus/bus.png)
 
 ### Control Center
+
+Arduino Uno & RFID-RC522.
 
 ![Control Center](control-center/control-center.png)
 

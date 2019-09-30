@@ -22,6 +22,9 @@ $ yarn electron-rebuild # Más información en https://serialport.io/docs/guide-
 ```
 control-center/
 |-- public/
+|-- utils/
+  |-- listeners.js
+  |-- pack.js
 |-- src/
   |-- actions/
   |-- components/
@@ -35,6 +38,8 @@ control-center/
 - **`App.js`**: Inicio de Create React App
 - **`.env`**: Acá van las variables de entorno. Seguí `.env.example` para crearlo
 - **`main.js`**: Código de Electron
+- **`listeners.js`**: Peticiones de Electron a la API
+- **`pack.js`**: Configuración de Electron Packager
 
 ## Desarrollo
 

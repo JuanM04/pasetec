@@ -2,16 +2,17 @@
 
 # PaseTec – _Web_
 
-[Create React App](https://facebook.github.io/create-react-app/) con un Service Worker y una API en [Express]([https://expressjs.com/](https://expressjs.com/)) que se comunica con una base de datos [Prisma](https://www.prisma.io/), todo subido a [Now](https://zeit.co/now).
+[Create React App](https://facebook.github.io/create-react-app/) con un Service Worker y una API en [Micro](https://github.com/zeit/micro) y [GraphQL](https://graphql.org/) (con un [Apollo Server](https://www.apollographql.com/docs/apollo-server/) y [graphql.js](https://github.com/f/graphql.js)) que se comunica con una base de datos [Prisma](https://www.prisma.io/), todo subido a [Now](https://zeit.co/now).
 
 ## Preparación
 
-Necesitás tener [Node](https://nodejs.org/en/) Y [Yarn](https://yarnpkg.com/en/) instalados.
+Necesitás tener [Node](https://nodejs.org/en/) Y [Yarn](https://yarnpkg.com/en/) instalados (más Now CLI y Prisma CLI).
 
 ```bash
-# Instalá Now
-$ yarn global add now
+# Instalá Now y Prisma
+$ yarn global add now prisma
 $ now login
+$ prisma login
 
 $ cd pasetec/web
 $ yarn install
