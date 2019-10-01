@@ -13,5 +13,4 @@ jobs:
         env:
           ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
         with:
-          entrypoint: "./web/"
-          args: "--prod"
+          args: "web/ --prod"
