@@ -1,0 +1,17 @@
+name: Now Deploy
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Deployment
+        uses: actions/zeit-now@1.0.0
+        env:
+          ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
+        with:
+          entrypoint: "./web/"
+          args: "--prod"
