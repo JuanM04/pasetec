@@ -61,9 +61,9 @@ const queries = {
 const sendStatusError = (err, e) => {
   let message = ''
   if (typeof err === 'string') message = err
-  else if (err.errors) message = err.errors[0].message
+  else if (err.errors) message = 'API ERROR\n\n' + err.errors[0].message
   else {
-    message = 'Error desconocido'
+    message = 'Error desconocido\n\n' + JSON.stringify(err)
     console.error(err)
   }
 

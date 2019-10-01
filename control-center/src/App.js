@@ -15,9 +15,6 @@ import Precios from './actions/precios'
 
 import PortSelector from './components/PortSelector'
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-import './styles.sass'
-
 const actions = [
   { name: 'Cargar', component: Cargar },
   { name: 'Crear', component: Crear },
