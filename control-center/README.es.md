@@ -14,7 +14,6 @@ $ yarn global add windows-build-tools
 
 $ cd pasetec/control-center
 $ yarn install
-$ yarn electron-rebuild # Más información en https://serialport.io/docs/guide-installation#electron
 ```
 
 ### Estructura de Archivos
@@ -43,7 +42,7 @@ control-center/
 
 ## Desarrollo
 
-Cuando estés desarrollando, necesitarás correr el servidor de React y el de Electron simultáneamente. Eso se logra ejecutando `$ yarn electron-dev`.
+Cuando estés desarrollando, necesitarás correr el servidor de React y el de Electron simultáneamente. Eso se logra ejecutando `$ yarn electron-dev` o `$ yarn electron-dev-win`.
 
 ## Compilado
 
@@ -57,5 +56,7 @@ $ yarn electron-pack
 Para compilar para una arquitectura distinta a la de tu PC:
 ```bash
 $ yarn postinstall --arch=ARCH
-$ yarn electron-pack --arch=ARCH
+
+$ ELECTRON_ARCH=ARCH yarn electron-pack # Unix
+$ set ELECTRON_ARCH=ARCH ;; yarn electron-pack # Windows
 ```

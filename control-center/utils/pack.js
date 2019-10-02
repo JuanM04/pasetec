@@ -8,6 +8,7 @@ async function bundleElectronApp(icon) {
     prune: true,
     out: path.resolve(__dirname, '../dist'),
     asar: true,
+    arch: process.env.ELECTRON_ARCH || null,
     icon,
   })
 

@@ -15,6 +15,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron-dev": "concurrently \"BROWSER=none PORT=5000 yarn start\" \"wait-on http://localhost:5000 && electron .\"",
+    "electron-dev-win": "set BROWSER=none ;; set PORT=5000 ;; concurrently \"yarn start\" \"wait-on http://localhost:5000 ;; electron .\"",
     "preelectron-pack": "yarn build",
     "electron-pack": "node utils/pack.js",
     "postinstall": "electron-rebuild"
