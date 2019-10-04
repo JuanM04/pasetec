@@ -36,7 +36,7 @@ export default () => {
           {portSetted && (
             <Nav navbar>
               {actions.map(action => (
-                <NavItem>
+                <NavItem key={action.name}>
                   <NavLink
                     active={action.name === actionSelected.name}
                     href="#"
