@@ -2,7 +2,7 @@ English | [Español](README.es.md)
 
 # PaseTec – _Web_
 
-[Create React App](https://facebook.github.io/create-react-app/) with a Service Worker and an [Micro](https://github.com/zeit/micro) and [GraphQL](https://graphql.org/) (with [Apollo Server](https://www.apollographql.com/docs/apollo-server/) and [graphql.js](https://github.com/f/graphql.js)) API that communicates to a [Prisma](https://www.prisma.io/) database, all uploaded to [Now](https://zeit.co/now).
+[Next.js](https://nextjs.org) with a Service Worker and a [GraphQL](https://graphql.org/) (with [Apollo](https://www.apollographql.com/)) API that communicates to a [Prisma](https://www.prisma.io/) database, all uploaded to [Now](https://zeit.co/now).
 
 ## Setup
 
@@ -22,30 +22,32 @@ $ yarn install
 
 ```
 web/
-|-- api/
-  |-- graphql/
 |-- prisma/
 |-- public/
 |-- src/
-  |-- App.js
-  |-- service-worker.js
+  |-- components/
+  |-- pages/
+    |-- api/
+      |-- graphql/
+  |-- utils/
 |-- .env
+|-- next.config.js
 |-- now.json
 ```
 
 - **`api/`**: Each API endpoint (Mirco)
 - **`graphql/`**: Apollo Server
+- **`pages/`**: Every Next.js page
 - **`prisma/`**: Prisma datamodel and JavaScript client
-- **`public/`**: Public files of Create React App
-- **`App.js`**: Create React App home
-- **`service-worker.js`**: [Workbox](https://developers.google.com/web/tools/workbox/) service worker
+- **`public/`**: Public files of Next.js
 - **`.env`**: There go the env vars. Follow `.env.example` to create it
+- **`next.config.js`**: Next.js configuration
 - **`now.json`**: Now configuration. Make sure to replace the secrets!
 
 ## Developing
 
-Run `$ now dev`. More info about it [here](https://zeit.co/blog/now-dev).
+Run `$ yarn dev`. It will run a Next.js local server.
 
 ## Building
 
-Run `$ now --target production`. More info about it [here](https://zeit.co/docs/v2/getting-started/introduction-to-now/).
+Run `$ now --prod`. More info about it [here](https://zeit.co/docs/v2/getting-started/introduction-to-now/).

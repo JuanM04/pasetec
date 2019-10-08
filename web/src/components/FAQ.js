@@ -7,7 +7,7 @@ import {
   ListGroupItemText,
 } from 'shards-react'
 
-import FAQ from '../faq.json'
+import FAQ from 'utils/faq.json'
 
 export default ({ pasePrice }) => (
   <Card className="FAQ">
