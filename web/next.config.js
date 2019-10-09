@@ -25,6 +25,7 @@ module.exports = withSass(
     env: isDev ? require('dotenv').config() : {},
 
     workboxOpts: {
+      swDest: 'static/service-worker.js',
       runtimeCaching: [
         {
           urlPattern: /^https?.*/,

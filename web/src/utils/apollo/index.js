@@ -6,6 +6,7 @@ export default initClient()
 export const GET_VIAJES = gql`
   query GET_VIAJES($dni: Int!) {
     getUser(dni: $dni) {
+      dni
       viajes
     }
   }
