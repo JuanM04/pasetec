@@ -1,0 +1,84 @@
+$primary:   #FFAA02
+$success:   #6EE550
+$info:      #0EC3F9
+$warning:   #FFD232
+$danger:    #FF6B79
+
+$google-fonts-import: '/fonts/fonts.css'
+$font-family-poppins-first: 'Proxima Nova', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
+
+@import "node_modules/shards-ui/src/scss/shards.scss"
+
+body
+  margin: 0
+
+.App
+  max-width: 100vw !important
+  width: 100%
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-direction: column
+  background: linear-gradient(180deg, rgba(255,255,255,1) 32.5%, $primary 32.5%)
+
+  @include media-breakpoint-up(sm)
+    padding: 0 calc((100vw - 500px) / 2)
+
+  h1
+    width: 100%
+    margin: 100px auto
+    font-size: 100px
+    text-align: center
+    font-weight: 800
+
+    @include media-breakpoint-down(sm)
+      font-size: 15vw
+
+
+  .Board
+    width: 100%
+    span
+      text-align: center
+    .col
+      display: flex
+      align-items: center
+      justify-content: center
+      flex-direction: column
+    
+    .top
+      .big
+        font-size: 30px
+        font-weight: bold
+      .small
+        font-size: 15px
+    .bottom
+
+
+  .FAQ
+    margin: 100px 25px
+    h3
+      margin: 13px 30px
+
+.Info
+  header
+    margin: 50px 0
+    h1
+      font-size: 100px
+      font-weight: 800
+      @include media-breakpoint-down(sm)
+        font-size: 15vw
+    
+    span
+      font-style: italic
+      @include media-breakpoint-down(sm)
+        font-size: 3.5vw
+  
+  section
+    margin-top: 25px
+    h2
+      padding-bottom: 5px
+      border-bottom: 5px solid $primary
+    // hr
+    //   border: 2.5px solid $primary
+      
+  

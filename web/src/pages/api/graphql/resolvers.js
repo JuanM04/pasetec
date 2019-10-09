@@ -1,11 +1,11 @@
-const { ApolloError, AuthenticationError } = require('apollo-server-micro')
-const { prisma } = require('../../prisma/generated/prisma-client')
+import { ApolloError, AuthenticationError } from 'apollo-server-micro'
+import { prisma } from 'prisma'
 
 const checkAuth = authed => {
   if (!authed) throw new AuthenticationError('Inavlid Secret')
 }
 
-module.exports = {
+export default {
   Query: {
     getUser: async (_, { id, uid, dni }) => await prisma.user({ id, uid, dni }),
     getMetadata: async () => {

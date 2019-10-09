@@ -1,5 +1,5 @@
 const { text, send } = require('micro')
-const { prisma } = require('../prisma/generated/prisma-client')
+const { prisma } = require('prisma')
 
 module.exports = async (req, res) => {
   if (req.headers.secret !== process.env.SECRET)

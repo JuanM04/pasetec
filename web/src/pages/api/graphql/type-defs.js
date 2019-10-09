@@ -1,6 +1,6 @@
-const { gql } = require('apollo-server-micro')
+import { gql } from 'apollo-server-micro'
 
-module.exports = gql`
+export default gql`
   scalar Date
 
   type User {
