@@ -41,15 +41,9 @@ Dentro de `arduino/*/wemos/`, necesitarás crear un archivo `CACert.ino`. Ahí i
 ```
 arduino/
 |-- bus/
-  |-- uno/
-  |-- wemos/
+|-- checker
 |-- control-center/
-  |-- uno/
 ```
-
-- **`bus/uno/`**: Contiene el códiga para el Arduino Uno que va en el colectivo
-- **`bus/wemos/`**: Contiene el códiga para el WeMoS D1 mini que va en el colectivo
-- **`control-center/uno/`**: Contiene el códiga para el Arduino Uno que va en el Centro de Control
 
 ## _Placas y Cables_
 
@@ -68,4 +62,4 @@ Arduino Uno y RFID-RC522.
 
 ## Notas
 
-No sé por qué, pero cuando enciendas un Uno y un WeMoS que estén conectados, el WeMoS **debe** ser encendido antes.
+No sé por qué, pero cuando enciendas un _Uno_ y un _WeMoS_ que estén conectados, el _WeMoS_ **debe** ser encendido antes o al mismo tiempo que el _Uno_.

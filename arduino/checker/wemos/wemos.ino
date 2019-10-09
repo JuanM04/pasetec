@@ -11,7 +11,8 @@
 MFRC522 mfrc522(SS_PIN, RST_PIN); // Create MFRC522 instance.
 
 WiFiClientSecure client;
-String serialAcum = "";
+String lastUID = "";
+bool mfrcRecentlyUsed = false;
 bool connecting = false;
 
 // External certificate (CACert.ino)
@@ -21,7 +22,7 @@ extern const unsigned int caCertLen;
 void useViaje(String UID)
 {
   client.print(String("") +
-               "POST /api/checker HTTP/1.1\r\n" +
+               "POST /api/use-viaje HTTP/1.1\r\n" +
                "Host: " + HOST + "\r\n" +
                "User-Agent: ESP8266\r\n" +
                "Content-Type: text/plain\r\n" +
@@ -84,7 +85,7 @@ void loop()
 {
   if (WiFi.status() == WL_CONNECTED)
   {
-    if (connecting)
+    if (connecting || !client.connected())
     {
       connecting = false;
       client.connect(HOST, 443);
@@ -92,7 +93,25 @@ void loop()
     }
 
     if (mfrc522.PICC_IsNewCardPresent() && mfrc522.PICC_ReadCardSerial())
-      useViaje(getUID());
+    {
+      mfrcRecentlyUsed = true;
+      String UID = getUID();
+      if (UID != lastUID)
+      {
+        lastUID = UID;
+        useViaje(UID);
+      }
+    }
+    else if (lastUID != "")
+    {
+      if (mfrcRecentlyUsed)
+      {
+        mfrcRecentlyUsed = false;
+        return;
+      }
+      else
+        lastUID = "";
+    }
 
     delay(500);
   }

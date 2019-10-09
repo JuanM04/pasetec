@@ -2,19 +2,22 @@
 #include <LiquidCrystal.h>
 
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+#define BUZZER 10
 
 String serialAcum = "";
 bool connecting = false;
 int connectingAccum = 0;
+
 bool LCDTimeoutOn = false;
 unsigned long timeFromLastLCD;
-#define BUZZER 10
+bool BuzzerTimeoutOn = false;
+unsigned long timeFromLastBuzzer;
 
 void playBuzzer()
 {
   digitalWrite(BUZZER, HIGH);
-  delay(1000);
-  digitalWrite(BUZZER, LOW);
+  BuzzerTimeoutOn = true;
+  timeFromLastBuzzer = millis();
 }
 
 void setLCDDefault()
@@ -106,8 +109,13 @@ void loop()
     serialAcum = "";
   }
 
-  if (LCDTimeoutOn && millis() - timeFromLastLCD > 5000)
+  if (LCDTimeoutOn && millis() - timeFromLastLCD > 3000)
     setLCDDefault();
+  if (BuzzerTimeoutOn && millis() - timeFromLastBuzzer > 500)
+  {
+    digitalWrite(BUZZER, LOW);
+    BuzzerTimeoutOn = false;
+  }
 
   delay(500);
 }
