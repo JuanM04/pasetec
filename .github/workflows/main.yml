@@ -12,8 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Deployment
-        uses: actions/zeit-now@1.0.0
+        run: "now web --prod"
         env:
           ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
-        with:
-          args: "web/ --prod"
