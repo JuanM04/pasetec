@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import {
   Card,
   ListGroup,
@@ -11,7 +12,7 @@ import FAQ from 'utils/faq.json'
 
 export default ({ pasePrice }) => (
   <Card className="FAQ">
-    <h3>F.A.Q.</h3>
+    <h3>Preguntas Frecuentes</h3>
     <ListGroup flush>
       {FAQ.map(({ question, answer }, i) => (
         <ListGroupItem key={i}>
@@ -21,6 +22,19 @@ export default ({ pasePrice }) => (
           </ListGroupItemText>
         </ListGroupItem>
       ))}
+      <ListGroupItem>
+        <ListGroupItemHeading>
+          Me interesa la idea. ¿Dónde consigo más información? ¿Quiénes hicieron
+          esto? ¿Puedo hacer un Pas-?
+        </ListGroupItemHeading>
+        <ListGroupItemText>
+          Shh, demasiadas preguntas. <i>Todo</i> lo que se sabe de PaseTec está{' '}
+          <Link href="/info">
+            <a>aquí</a>
+          </Link>
+          . Sentite libre de leer todo lo que hay ahí.
+        </ListGroupItemText>
+      </ListGroupItem>
     </ListGroup>
   </Card>
 )
