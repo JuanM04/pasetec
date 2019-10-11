@@ -3675,11 +3675,6 @@ graphql-upload@^8.0.2:
     http-errors "^1.7.2"
     object-path "^0.11.4"
 
-graphql.js@^0.6.5:
-  version "0.6.5"
-  resolved "https://registry.yarnpkg.com/graphql.js/-/graphql.js-0.6.5.tgz#6be088d3d7368bd028eb43c31ef53671bf9e7fa0"
-  integrity sha512-C9hwTP8COeKlodFJ8f+AKqZYtwIJRaEf9p+njyqqqMF/YypRLZ+o2SvL/0ykmYooBlCYb2eGPk66x1nqBTZeMQ==
-
 graphql@^14.3.0, graphql@^14.5.3, graphql@^14.5.8:
   version "14.5.8"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-14.5.8.tgz#504f3d3114cb9a0a3f359bbbcf38d9e5bf6a6b3c"
@@ -5098,7 +5093,7 @@ next-offline@^4.0.6:
     webpack "^4.19.1"
     workbox-webpack-plugin "^4.3.1"
 
-next@^9.1.0:
+next@^9.1.1:
   version "9.1.1"
   resolved "https://registry.yarnpkg.com/next/-/next-9.1.1.tgz#bede2e834548020bc4d3be0c46e3ed7edaac6d14"
   integrity sha512-++jiUA1GN/dOqe6+oLT78rdrRnPmf5yHUbug1tdZBYeQ6HE+ypDIeVelmCmyGx+JDNB3TcxNx5R2+D/Cbrwnng==

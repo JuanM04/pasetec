@@ -51,7 +51,7 @@ export default () => (
           campo de deportes.
         </li>
         <li>
-          <b>Centro de Control</b>: el software de dónde se cargan los viajes
+          <b>Centro de Control</b>: el software de donde se cargan los viajes
           (que se encuentra en Cooperadora).
         </li>
         <li>
@@ -83,9 +83,10 @@ export default () => (
       </p>
     </section>
     <section>
-      <h2>Génesis</h2>
+      <h2>El Proceso</h2>
+      <h4>Génesis</h4>
       <p>
-        Alrededor de junio de 2019, el profesor Gonzalo Vitale (en la materia de
+        Alrededor de julio de 2019, el profesor Gonzalo Vitale (en la materia de
         electrónica) nos puso en grupos con el fin de "idear un proyecto y
         llevar a cabo hasta fin de año". Nosotros (Ángel Petti, Tomás Totis,
         Emilia Sanz y Juan Martín Seery; todos de 4º año), luego de un rato de
@@ -98,8 +99,8 @@ export default () => (
         En paralelo estábamos dieñando la caja y creando el sistema. Para la
         caja tomamos medidas en el colectivo, medimos los componentes con
         calibre y la diseñamos en 3D (modelos en el repositorio). El modelo
-        cambió, y cambió mucho en el tiempo, mientras nos dábamos cuenta de qué
-        materiales usar, dónde iría, etcétera. Aprendimos cómo usar{' '}
+        cambió mucho en el tiempo, mientras nos dábamos cuenta de qué materiales
+        usar, dónde iría, etcétera. Aprendimos cómo usar{' '}
         <a href="https://www.tinkercad.com/">Tinkercad</a>, modelado 3D, y cómo
         organizar muchos cables en muy poco espacio.
       </p>
@@ -111,9 +112,7 @@ export default () => (
         pero finalmente aprendimos de electrónica, Arduino y transmisión de
         datos.
       </p>
-    </section>
-    <section>
-      <h2>"Funcionando"</h2>
+      <h4>"Funcionando"</h4>
       <p>
         A todo esto, llegamos a octubre. <i>Teníamos</i> que prensentar el
         proyecto. De un momento a otro, nos encontramos usando todas nuestras
@@ -124,7 +123,9 @@ export default () => (
       </p>
       <p>
         Poco después, empezamos a hacer pruebas posta: pusimos la caja en el
-        colectivo y empezamos a probar el sistema solo con nuestro curso. TODO
+        colectivo y empezamos a probar el sistema solo con nuestro curso.
+        <br />
+        <b>W.I.P.</b>
       </p>
     </section>
   </Container>

@@ -32,7 +32,7 @@ export default ({ pasePrice }) => (
           <Link href="/info">
             <a>aquí</a>
           </Link>
-          . Sentite libre de leer todo lo que hay ahí.
+          . Sentite libre de leer (e incluso de preguntar).
         </ListGroupItemText>
       </ListGroupItem>
     </ListGroup>
