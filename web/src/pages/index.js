@@ -21,11 +21,11 @@ function App(props) {
         query: GET_VIAJES,
         variables: { dni },
       })
-      .then(({ data: { getUser } }) => {
+      .then(({ data }) => {
         setLoading(false)
 
-        if (!getUser) alert('El usuario no existe')
-        else setUser(getUser)
+        if (!data.user) alert('El usuario no existe')
+        else setUser(data.user)
       })
       .catch(console.error)
   }
@@ -102,8 +102,8 @@ App.getInitialProps = async ctx => {
       })
 
     return {
-      prices: prices.data ? prices.data.getMetadata : {},
-      user: user.data ? user.data.getUser : {},
+      prices: prices.data ? prices.data.metadata : {},
+      user: user.data ? user.data.user : {},
     }
   } catch (error) {
     console.error(error)

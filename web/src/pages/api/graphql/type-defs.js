@@ -18,8 +18,8 @@ export default gql`
   }
 
   type Query {
-    getUser(id: ID, uid: String, dni: Int): User
-    getMetadata: Metadata
+    user(id: ID, uid: String, dni: Int): User
+    metadata: Metadata
   }
 
   type Mutation {

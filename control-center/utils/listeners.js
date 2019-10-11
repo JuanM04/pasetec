@@ -14,7 +14,7 @@ const graph = graphql(`${process.env.BASE_URL}/api/graphql`, {
 const queries = {
   getUser: graph(`
     query GET_USER($id: ID, $uid: String, $dni: Int) {
-      getUser(id: $id, uid: $uid, dni: $dni) {
+      user(id: $id, uid: $uid, dni: $dni) {
         id
         uid
         dni
@@ -24,7 +24,7 @@ const queries = {
   `),
   getPrices: graph(`
     query GET_PRICES {
-      getMetadata {
+      metadata {
         pasePrice
         viajePrice
       }
@@ -74,7 +74,7 @@ module.exports = ipcMain => {
   ipcMain.on('get-user', (e, data) =>
     queries
       .getUser(data)
-      .then(({ getUser: user }) => {
+      .then(({ user }) => {
         if (user) e.reply('get-user-res', user)
         else throw 'El usuario no se ha encontrado'
       })
@@ -105,7 +105,7 @@ module.exports = ipcMain => {
   ipcMain.on('get-prices', (e, data) =>
     queries
       .getPrices(data)
-      .then(({ getMetadata: metadata }) => e.reply('get-prices-res', metadata))
+      .then(({ metadata }) => e.reply('get-prices-res', metadata))
       .catch(err => sendStatusError(err, e))
   )
 

@@ -7,8 +7,8 @@ const checkAuth = authed => {
 
 export default {
   Query: {
-    getUser: async (_, { id, uid, dni }) => await prisma.user({ id, uid, dni }),
-    getMetadata: async () => {
+    user: async (_, { id, uid, dni }) => await prisma.user({ id, uid, dni }),
+    metadata: async () => {
       const metadatas = await prisma.metadatas({ orderBy: 'date_ASC', last: 1 })
       return metadatas[0]
     },
