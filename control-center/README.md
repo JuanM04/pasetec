@@ -42,7 +42,7 @@ control-center/
 
 ## Developing
 
-When developing, you'll run the React server and the Electron app with the same command: `$ yarn electron-dev`.
+When developing, you'll run the React server and the Electron app with the same command: `$ yarn electron-dev`. Also, you need a `.env.test` file (equal to `.env`, but with development variables).
 
 ## Building
 

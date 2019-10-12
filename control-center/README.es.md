@@ -42,7 +42,7 @@ control-center/
 
 ## Desarrollo
 
-Cuando estés desarrollando, necesitarás correr el servidor de React y el de Electron simultáneamente. Eso se logra ejecutando `$ yarn electron-dev`.
+Cuando estés desarrollando, necesitarás correr el servidor de React y el de Electron simultáneamente. Eso se logra ejecutando `$ yarn electron-dev`.  Además, necesitarás un archivo `.env.test` (igual a `.env`, pero con variables de desarrollo).
 
 ## Compilado
 
