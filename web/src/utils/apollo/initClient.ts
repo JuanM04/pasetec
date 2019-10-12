@@ -1,5 +1,5 @@
-const { ApolloClient, InMemoryCache, HttpLink } = require('apollo-boost')
-const { SchemaLink } = require('apollo-link-schema')
+import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost'
+import { SchemaLink } from 'apollo-link-schema'
 let apolloClient = null
 
 // Always creates a new client in the server, and sometimes in the client

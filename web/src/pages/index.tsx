@@ -6,25 +6,33 @@ import apolloClient, { GET_VIAJES, GET_PRICES } from 'utils/apollo'
 import { DniInput, FAQ, ViajesCard } from 'components'
 import { Alert, Container } from 'shards-react'
 
-function App(props) {
+type User = false | BaseUser
+type Prices = false | BasePrices
+
+interface Props {
+  prices: Prices
+  user: User
+}
+
+function App(props: Props) {
   const [online, setOnline] = useState(true)
   const [prices, setPrices] = useState(props.prices)
   const [user, setUser] = useState(props.user)
   const [loading, setLoading] = useState(false)
 
-  const getUser = dni => {
-    dni = parseInt(dni)
+  const getUser = (dni: string) => {
     setLoading(true)
 
     apolloClient
       .query({
         query: GET_VIAJES,
-        variables: { dni },
+        variables: { dni: parseInt(dni) },
       })
-      .then(({ data }) => {
+      .then(res => {
+        const user: User = res.data.user
         setLoading(false)
-        if (!data.user) alert('El usuario no existe')
-        else setUser(data.user)
+        if (!user) alert('El usuario no existe')
+        else setUser(user)
       })
       .catch(console.error)
   }
@@ -53,7 +61,7 @@ function App(props) {
     if (typeof window === 'undefined') return
     storage.set('query-user', user)
 
-    if (!user.dni) return
+    if (!user) return
     nookies.set({}, 'user', user.dni.toString(), {
       maxAge: 30 * 24 * 60 * 60, // 30 days
       path: '/',
@@ -73,47 +81,49 @@ function App(props) {
         </Alert>
       )}
 
-      {!user.dni && online && <DniInput loading={loading} callback={getUser} />}
+      {!user && online && <DniInput loading={loading} callback={getUser} />}
 
-      {user.dni && (
+      {user && (
         <ViajesCard
-          viajePrice={prices.viajePrice || '--'}
+          viajePrice={prices ? prices.viajePrice : '--'}
           user={user}
           logOut={() => {
-            setUser({})
+            setUser(false)
             nookies.destroy({}, 'user')
           }}
         />
       )}
 
-      <FAQ pasePrice={prices.pasePrice || '--'} />
+      <FAQ pasePrice={prices ? prices.pasePrice : '--'} />
     </Container>
   )
 }
 
 App.getInitialProps = async ctx => {
   try {
-    const prices = await apolloClient.query({ query: GET_PRICES })
+    let user: User = false,
+      prices: Prices = false
+
+    const pricesRes = await apolloClient.query({ query: GET_PRICES })
+    if ('data' in pricesRes) prices = pricesRes.data.metadata
 
     // "If there's a user in the cookies, get it"
-    let user = {}
     const { user: dni } = nookies.get(ctx)
-    if (dni)
-      user = await apolloClient.query({
+    if (dni) {
+      const userRes = await apolloClient.query({
         query: GET_VIAJES,
         variables: { dni: parseInt(dni) },
       })
-
-    return {
-      prices: prices.data ? prices.data.metadata : {},
-      user: user.data ? user.data.user : {},
+      if ('data' in userRes) user = userRes.data.user
     }
+
+    return { prices, user }
   } catch (error) {
     console.error(error)
     nookies.destroy(ctx, 'user')
     return {
-      prices: {},
-      user: {},
+      prices: false,
+      user: false,
     }
   }
 }

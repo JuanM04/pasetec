@@ -1,12 +1,18 @@
 import React from 'react'
 import { Button, Card, CardBody, Col, Row } from 'shards-react'
 
-export default ({ user: { viajes, dni }, viajePrice, logOut }) => (
+interface Props {
+  user: BaseUser
+  viajePrice: number | string
+  logOut(): void
+}
+
+export default ({ user, viajePrice, logOut }: Props) => (
   <Card className="Board">
     <CardBody>
       <Row className="top">
         <Col>
-          <span className="big">{viajes}</span>
+          <span className="big">{user.viajes}</span>
           <span className="small">viajes</span>
         </Col>
         <Col>
@@ -17,7 +23,7 @@ export default ({ user: { viajes, dni }, viajePrice, logOut }) => (
       <hr />
       <Row className="bottom">
         <Col>
-          <span>DNI: {dni.toLocaleString('es')}</span>
+          <span>DNI: {user.dni.toLocaleString('es')}</span>
         </Col>
         <Col xs="4">
           <Button theme="primary" pill outline size="sm" onClick={logOut}>

@@ -1,23 +1,22 @@
-const path = require('path')
 const withSass = require('@zeit/next-sass')
 const withOffline = require('next-offline')
 
 const isDev = process.env.NODE_ENV !== 'production'
+const path = dir => require('path').resolve(__dirname, dir)
 
 module.exports = withSass(
   withOffline({
     webpack: config => {
       // Aliases that let you do "import component from 'components'" instead of "import component from '../components'"
-      config.resolve.alias['pages'] = path.join(__dirname, 'src/pages')
-      config.resolve.alias['components'] = path.join(
-        __dirname,
-        'src/components'
-      )
-      config.resolve.alias['utils'] = path.join(__dirname, 'src/utils')
-      config.resolve.alias['prisma'] = path.join(
-        __dirname,
-        'prisma/generated/prisma-client'
-      )
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        pages: path('src/pages'),
+        components: path('src/components/index.ts'),
+        utils: path('src/utils'),
+        prisma: path('prisma/generated/prisma-client/index.ts'),
+      }
+
+      config.resolve.extensions.push('.ts', '.tsx')
       return config
     },
 

@@ -1,7 +1,7 @@
 import { ApolloError, AuthenticationError } from 'apollo-server-micro'
 import { prisma } from 'prisma'
 
-const checkAuth = authed => {
+const checkAuth = (authed: boolean) => {
   if (!authed) throw new AuthenticationError('Inavlid Secret')
 }
 

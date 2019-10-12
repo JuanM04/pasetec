@@ -2,7 +2,13 @@ import React, { useState } from 'react'
 import slugify from 'slugify'
 import { Button, FormInput, InputGroup, InputGroupAddon } from 'shards-react'
 
-export default ({ loading, callback }) => {
+interface Props {
+  loading: boolean
+  callback(dni: string): void
+}
+
+export default (props: Props) => {
+  const { loading, callback } = props
   const [dniInput, setDniInput] = useState('')
 
   return (
@@ -11,9 +17,7 @@ export default ({ loading, callback }) => {
         placeholder="DNI"
         value={dniInput}
         onChange={e =>
-          setDniInput(
-            parseInt(slugify(e.target.value, { remove: /[^\d]+/g })) || ''
-          )
+          setDniInput(slugify(e.target.value, { remove: /[^\d]+/g }) || '')
         }
         onKeyPress={e => {
           if (loading || dniInput === '') return
