@@ -9,6 +9,7 @@ export default ({ setPortSetted }) => {
 
   useEffect(() => {
     ipcRenderer.on('ports', (_, portsRes) => {
+      portsRes = portsRes.filter(port => port.comName !== 'COM1')
       setPorts(portsRes)
       if (portsRes.length > 0) setPortSelected(portsRes[0].comName)
     })
@@ -18,7 +19,7 @@ export default ({ setPortSetted }) => {
 
   return (
     <Container className="main">
-      <p>Elija un puerto (nunca COM1)</p>
+      <p>Elija un puerto</p>
       <FormSelect
         className="PortSelector"
         value={portSelected}
@@ -49,6 +50,9 @@ export default ({ setPortSetted }) => {
           Recargar
         </Button>
       </ButtonGroup>
+      <span className="no-scan" onClick={() => setPortSetted(true)}>
+        Continuar sin escáner
+      </span>
     </Container>
   )
 }
