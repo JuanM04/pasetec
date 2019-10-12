@@ -1,0 +1,31 @@
+{
+  "folders": [
+    {
+      "name": "Arduino",
+      "path": "arduino"
+    },
+    {
+      "name": "Control Center",
+      "path": "control-center"
+    },
+    {
+      "name": "Web",
+      "path": "web"
+    }
+  ],
+  "settings": {
+    "files.associations": {
+      "*.html": "html",
+      "**/src/**/*.js": "javascriptreact",
+      "*.prisma": "graphql",
+      "typeinfo": "cpp"
+    },
+    "javascript.preferences.importModuleSpecifier": "non-relative",
+    "prettier.arrowParens": "avoid",
+    "prettier.trailingComma": "es5",
+    "prettier.tabWidth": 2,
+    "prettier.semi": false,
+    "prettier.singleQuote": true,
+    "prettier.jsxSingleQuote": false
+  }
+}
