@@ -1,5 +1,5 @@
 import initClient from './initClient'
-import gql from 'graphql-tag'
+import { gql } from 'apollo-boost'
 
 export default initClient()
 
