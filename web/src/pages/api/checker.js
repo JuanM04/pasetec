@@ -2,8 +2,7 @@ const { text, send } = require('micro')
 const { prisma } = require('prisma')
 
 module.exports = async (req, res) => {
-  if (req.headers.secret !== process.env.SECRET)
-    return send(res, 401, { error: 'Invalid Secret' })
+  if (req.headers.secret !== process.env.SECRET) throw 'error!'
 
   const uid = await text(req)
 
