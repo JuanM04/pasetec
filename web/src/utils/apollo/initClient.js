@@ -2,6 +2,7 @@ const { ApolloClient, InMemoryCache, HttpLink } = require('apollo-boost')
 const { SchemaLink } = require('apollo-link-schema')
 let apolloClient = null
 
+// Always creates a new client in the server, and sometimes in the client
 export default function() {
   if (typeof window === 'undefined') return createApolloClient()
   if (!apolloClient) apolloClient = createApolloClient()
@@ -20,10 +21,10 @@ function createApolloClient() {
   })
 }
 
+// Creates link: if in the server, uses directly the schema; otherwise creates an http-link
 function createIsomorphLink() {
   if (typeof window === 'undefined') {
     const schema = require('./schema').default
-
     return new SchemaLink({ schema })
   } else {
     return new HttpLink({

@@ -23,16 +23,23 @@ void startLCDTimeout()
   timeFromLastLCD = millis();
 }
 
+// LCD helper
 void writeOnLCD(int col, int row, String str)
 {
   lcd.setCursor(col, row);
   lcd.print(str);
 }
 
+/*
+  There's an animation when loading:
+  ".   " > "..  " > "... " > "...." (and repeat)
+  This function does it.
+*/
 void connectingDots(int msgCol, String msg)
 {
   if (!connecting || connectingAccum == 4)
   {
+    connecting = false;
     connectingAccum = 0;
     lcd.clear();
     writeOnLCD(msgCol, 1, msg);
@@ -43,6 +50,7 @@ void connectingDots(int msgCol, String msg)
   connecting = true;
 }
 
+// When a new message comes in the Serial, this runs
 void newWifiStatus(String wifiStatus)
 {
   if (wifiStatus.startsWith("res:"))
@@ -83,6 +91,7 @@ void setup()
 
 void loop()
 {
+  // Serial reader
   while (Serial.available() > 0)
   {
     serialAcum.concat(char(Serial.read()));
@@ -93,6 +102,10 @@ void loop()
     serialAcum = "";
   }
 
+  /*
+    Timeouts
+    LCD = 5s
+  */
   if (LCDTimeoutOn && millis() - timeFromLastLCD > 5000)
     setLCDDefault();
 

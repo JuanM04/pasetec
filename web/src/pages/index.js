@@ -23,13 +23,13 @@ function App(props) {
       })
       .then(({ data }) => {
         setLoading(false)
-
         if (!data.user) alert('El usuario no existe')
         else setUser(data.user)
       })
       .catch(console.error)
   }
 
+  // Runs on each loading
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const online = navigator.onLine
@@ -37,6 +37,7 @@ function App(props) {
       window.addEventListener('online', () => setOnline(true))
       window.addEventListener('offline', () => setOnline(false))
 
+      // Offline support: saves and reads queries
       if (online) {
         storage.set('query-prices', prices)
         storage.set('last-online', new Date().toISOString())
@@ -47,6 +48,7 @@ function App(props) {
     }
   }, [])
 
+  // Runs when "user" is modified
   useEffect(() => {
     if (typeof window === 'undefined') return
     storage.set('query-user', user)
@@ -93,6 +95,7 @@ App.getInitialProps = async ctx => {
   try {
     const prices = await apolloClient.query({ query: GET_PRICES })
 
+    // "If there's a user in the cookies, get it"
     let user = {}
     const { user: dni } = nookies.get(ctx)
     if (dni)

@@ -7,6 +7,7 @@ const isDev = process.env.NODE_ENV !== 'production'
 module.exports = withSass(
   withOffline({
     webpack: config => {
+      // Aliases that let you do "import component from 'components'" instead of "import component from '../components'"
       config.resolve.alias['pages'] = path.join(__dirname, 'src/pages')
       config.resolve.alias['components'] = path.join(
         __dirname,

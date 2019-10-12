@@ -1,4 +1,4 @@
-const { text, send } = require('micro')
+const { text } = require('micro')
 const { prisma } = require('prisma')
 
 module.exports = async (req, res) => {

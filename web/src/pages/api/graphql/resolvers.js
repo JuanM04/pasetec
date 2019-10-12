@@ -5,6 +5,12 @@ const checkAuth = authed => {
   if (!authed) throw new AuthenticationError('Inavlid Secret')
 }
 
+/*
+  Read slowly, because Prettier don't allow me to use enters :c
+  
+  "checkAuth" checks if authed (which is validated in the context function in 'index.js')
+*/
+
 export default {
   Query: {
     user: async (_, { id, uid, dni }) => await prisma.user({ id, uid, dni }),

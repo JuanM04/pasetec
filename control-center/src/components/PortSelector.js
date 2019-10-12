@@ -9,6 +9,7 @@ export default ({ setPortSetted }) => {
 
   useEffect(() => {
     ipcRenderer.on('ports', (_, portsRes) => {
+      // We don't like COM1
       portsRes = portsRes.filter(port => port.comName !== 'COM1')
       setPorts(portsRes)
       if (portsRes.length > 0) setPortSelected(portsRes[0].comName)
