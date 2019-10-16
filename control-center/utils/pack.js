@@ -1,10 +1,10 @@
 const path = require('path')
 const packager = require('electron-packager')
-const rebuild = require('electron-packager').default
+const rebuild = require('electron-rebuild').default
 
 const ARCH = require('yargs').argv.arch || null
 
-async function bundleElectronApp(icon) {
+async function bundleElectronApp() {
   let icon = ''
 
   if (process.platform === 'darwin')
@@ -34,4 +34,4 @@ async function bundleElectronApp(icon) {
   console.log(`Electron app bundles created:\n${appPaths.join('\n')}`)
 }
 
-bundleElectronApp(icon)
+bundleElectronApp()
