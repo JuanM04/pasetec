@@ -1,9 +1,9 @@
-const { ApolloClient } = require('apollo-client')
-const { InMemoryCache } = require('apollo-cache-inmemory')
-
+import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost'
+import { SchemaLink } from 'apollo-link-schema'
 let apolloClient = null
 
-module.exports = function() {
+// Always creates a new client in the server, and sometimes in the client
+export default function() {
   if (typeof window === 'undefined') return createApolloClient()
   if (!apolloClient) apolloClient = createApolloClient()
 
@@ -21,15 +21,12 @@ function createApolloClient() {
   })
 }
 
+// Creates link: if in the server, uses directly the schema; otherwise creates an http-link
 function createIsomorphLink() {
   if (typeof window === 'undefined') {
-    const { SchemaLink } = require('apollo-link-schema')
     const schema = require('./schema').default
-
     return new SchemaLink({ schema })
   } else {
-    const { HttpLink } = require('apollo-link-http')
-
     return new HttpLink({
       uri: '/api/graphql',
       credentials: 'same-origin',

@@ -63,6 +63,7 @@ function sendPorts() {
 ipcMain.on('get-ports', sendPorts)
 
 ipcMain.on('use-port', (e, port) => {
+  // An event listener to Serial
   const serial = new SerialPort(port, { baudRate: 115200 })
   const parser = serial.pipe(new Readline())
 

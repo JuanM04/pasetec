@@ -1,14 +1,20 @@
 import { ApolloError, AuthenticationError } from 'apollo-server-micro'
 import { prisma } from 'prisma'
 
-const checkAuth = authed => {
+const checkAuth = (authed: boolean) => {
   if (!authed) throw new AuthenticationError('Inavlid Secret')
 }
 
+/*
+  Read slowly, because Prettier don't allow me to use enters :c
+  
+  "checkAuth" checks if authed (which is validated in the context function in 'index.js')
+*/
+
 export default {
   Query: {
-    getUser: async (_, { id, uid, dni }) => await prisma.user({ id, uid, dni }),
-    getMetadata: async () => {
+    user: async (_, { id, uid, dni }) => await prisma.user({ id, uid, dni }),
+    metadata: async () => {
       const metadatas = await prisma.metadatas({ orderBy: 'date_ASC', last: 1 })
       return metadatas[0]
     },

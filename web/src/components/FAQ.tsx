@@ -10,7 +10,11 @@ import {
 
 import FAQ from 'utils/faq.json'
 
-export default ({ pasePrice }) => (
+interface Props {
+  pasePrice: number | string
+}
+
+export default ({ pasePrice }: Props) => (
   <Card className="FAQ">
     <h3>Preguntas Frecuentes</h3>
     <ListGroup flush>

@@ -42,7 +42,7 @@ control-center/
 
 ## Desarrollo
 
-Cuando estés desarrollando, necesitarás correr el servidor de React y el de Electron simultáneamente. Eso se logra ejecutando `$ yarn electron-dev` o `$ yarn electron-dev-win`.
+Cuando estés desarrollando, necesitarás correr el servidor de React y el de Electron simultáneamente. Eso se logra ejecutando `$ yarn electron-dev`.  Además, necesitarás un archivo `.env.test` (igual a `.env`, pero con variables de desarrollo).
 
 ## Compilado
 
@@ -55,8 +55,5 @@ $ yarn electron-pack
 
 Para compilar para una arquitectura distinta a la de tu PC:
 ```bash
-$ yarn postinstall --arch=ARCH
-
-$ ELECTRON_ARCH=ARCH yarn electron-pack # Unix
-$ set ELECTRON_ARCH=ARCH ;; yarn electron-pack # Windows
+$ yarn electron-pack --arch=ARCH
 ```

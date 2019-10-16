@@ -1,13 +1,12 @@
-const { text, send } = require('micro')
-const { prisma } = require('prisma')
+import { text } from 'micro'
+import { prisma } from 'prisma'
+import { IncomingMessage, OutgoingMessage } from 'http'
 
-module.exports = async (req, res) => {
-  if (req.headers.secret !== process.env.SECRET)
-    return send(res, 401, { error: 'Invalid Secret' })
-
-  const uid = await text(req)
-
+export default async (req: IncomingMessage, res: OutgoingMessage) => {
   try {
+    if (req.headers.secret !== process.env.SECRET) throw 'error!'
+    const uid = await text(req)
+
     let user = await prisma.user({ uid })
     if (!user) throw 'error!'
     if (!user.viajes) throw 'viajes:-1!'
@@ -24,8 +23,8 @@ module.exports = async (req, res) => {
       data: { initialViajes: user.viajes + 1 },
     })
 
-    res.send(`viajes:${user.viajes}!`)
+    res.end(`viajes:${user.viajes}!`)
   } catch (error) {
-    res.send(error)
+    res.end(error)
   }
 }

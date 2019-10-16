@@ -1,117 +1,75 @@
-const path = require('path')
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+const path = require('path'),
+  fetch = require('node-fetch'),
+  { ApolloClient, HttpLink, InMemoryCache } = require('apollo-boost'),
+  queries = require('./queries'),
+  isDev = require('electron-is-dev')
 
-const graphql = require('graphql.js')
-const graph = graphql(`${process.env.BASE_URL}/api/graphql`, {
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    Secret: process.env.SECRET,
-  },
-  asJSON: true,
+require('dotenv').config({
+  path: path.resolve(__dirname, `../.env${isDev ? '.test' : ''}`),
 })
 
-const queries = {
-  getUser: graph(`
-    query GET_USER($id: ID, $uid: String, $dni: Int) {
-      getUser(id: $id, uid: $uid, dni: $dni) {
-        id
-        uid
-        dni
-        viajes
-      }
-    }
-  `),
-  getPrices: graph(`
-    query GET_PRICES {
-      getMetadata {
-        pasePrice
-        viajePrice
-      }
-    }
-  `),
-  addViajes: graph(`
-    mutation ADD_VIAJES($id: ID, $newViajes: Int!) {
-      addViajes(id: $id, newViajes: $newViajes)
-    }
-  `),
-  createUser: graph(`
-    mutation CREATE_USER($uid: String!, $dni: Int!) {
-      createUser(uid: $uid, dni: $dni) {
-        id
-      }
-    }
-  `),
-  updateUser: graph(`
-    mutation UPDATE_USER($id: ID!, $uid: String!, $dni: Int!, $viajes: Int!) {
-      updateUser(id: $id, uid: $uid, dni: $dni, viajes: $viajes) {
-        id
-      }
-    }
-  `),
-  updatePrices: graph(`
-    mutation UPDATE_PRICES($pasePrice: Int!, $viajePrice: Int!) {
-      updateMetadata(pasePrice: $pasePrice, viajePrice: $viajePrice) {
-        id
-      }
-    }
-  `),
-}
+// Apollo Client
+const client = new ApolloClient({
+  link: new HttpLink({
+    uri: `${process.env.BASE_URL}/api/graphql`,
+    fetch,
+    headers: {
+      Secret: process.env.SECRET,
+    },
+  }),
+  cache: new InMemoryCache(),
+})
 
 const sendStatusError = (err, e) => {
-  let message = ''
-  if (typeof err === 'string') message = err
-  else if (err.errors) message = 'API ERROR\n\n' + err.errors[0].message
-  else {
-    message = 'Error desconocido\n\n' + JSON.stringify(err)
-    console.error(err)
-  }
-
-  e.reply('status', { type: 'ERROR', message })
+  e.reply('status', {
+    type: 'ERROR',
+    message: JSON.stringify(err),
+  })
 }
 
 module.exports = ipcMain => {
-  ipcMain.on('get-user', (e, data) =>
-    queries
-      .getUser(data)
-      .then(({ getUser: user }) => {
-        if (user) e.reply('get-user-res', user)
+  // Yep, there's a lot of listeners
+  ipcMain.on('get-user', (e, variables) =>
+    client
+      .query({ query: queries.getUser, variables })
+      .then(({ data }) => {
+        if (data.user) e.reply('get-user-res', data.user)
         else throw 'El usuario no se ha encontrado'
       })
       .catch(err => sendStatusError(err, e))
   )
 
-  ipcMain.on('add-viajes', (e, data) =>
-    queries
-      .addViajes(data)
-      .then(({ addViajes: viajes }) => e.reply('add-viajes-res', viajes))
+  ipcMain.on('add-viajes', (e, variables) =>
+    client
+      .mutate({ mutation: queries.addViajes, variables })
+      .then(({ data }) => e.reply('add-viajes-res', data.addViajes))
       .catch(err => sendStatusError(err, e))
   )
 
-  ipcMain.on('create-user', (e, data) =>
-    queries
-      .createUser(data)
+  ipcMain.on('create-user', (e, variables) =>
+    client
+      .mutate({ mutation: queries.createUser, variables })
       .then(() => e.reply('status', { type: 'USER_CREATED' }))
       .catch(err => sendStatusError(err, e))
   )
 
-  ipcMain.on('update-user', (e, data) =>
-    queries
-      .updateUser(data)
+  ipcMain.on('update-user', (e, variables) =>
+    client
+      .mutate({ mutation: queries.updateUser, variables })
       .then(() => e.reply('status', { type: 'USER_UPDATED' }))
       .catch(err => sendStatusError(err, e))
   )
 
-  ipcMain.on('get-prices', (e, data) =>
-    queries
-      .getPrices(data)
-      .then(({ getMetadata: metadata }) => e.reply('get-prices-res', metadata))
+  ipcMain.on('get-prices', (e, variables) =>
+    client
+      .query({ query: queries.getPrices, variables })
+      .then(({ data }) => e.reply('get-prices-res', data.metadata))
       .catch(err => sendStatusError(err, e))
   )
 
-  ipcMain.on('update-prices', (e, data) =>
-    queries
-      .updatePrices(data)
+  ipcMain.on('update-prices', (e, variables) =>
+    client
+      .mutate({ mutation: queries.updatePrices, variables })
       .then(() => e.reply('status', { type: 'PRICES_UPDATED' }))
       .catch(err => sendStatusError(err, e))
   )

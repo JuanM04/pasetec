@@ -1,8 +1,0 @@
-{
-  "files.associations": {
-    "*.html": "html",
-    "**/src/**/*.js": "javascriptreact",
-    "*.prisma": "graphql",
-    "typeinfo": "cpp"
-  }
-}

@@ -19,6 +19,7 @@ bool connecting = false;
 extern const unsigned char caCert[] PROGMEM;
 extern const unsigned int caCertLen;
 
+// HTTPS Request
 void useViaje(String UID)
 {
   client.print(String("") +
@@ -37,10 +38,15 @@ void useViaje(String UID)
       break;
   }
 
+  /*
+    '!' is because the responses are "viajes:2!", "error!", etc.
+    It is like that because of performance
+  */
   String res = client.readStringUntil('!');
   Serial.print(res);
 }
 
+// I don't know exactly how it works, but it works.
 String getUID()
 {
   String content = "";
@@ -93,6 +99,11 @@ void loop()
       Serial.print("connected");
     }
 
+    /*
+      So, "mfrcRecentlyUsed" exists because of some weirdness of the two functions below.
+      If I have my card in the scanner indefinitely, these function will return [true, false, true, false, true, ...].
+      "mfrcRecentlyUsed" bypass that :)
+    */
     if (mfrc522.PICC_IsNewCardPresent() && mfrc522.PICC_ReadCardSerial())
     {
       mfrcRecentlyUsed = true;

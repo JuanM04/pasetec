@@ -5,6 +5,7 @@
 #define RST_PIN 9
 MFRC522 mfrc522(SS_PIN, RST_PIN); // Create MFRC522 instance.
 
+// I don't know exactly how it works, but it works.
 String getUID()
 {
   String content = "";
